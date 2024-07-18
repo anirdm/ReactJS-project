@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './AuthPage.module.css'
-import RegisterForm from '../../components/AuthForm/RegisterForm';
-import LoginForm from '../../components/AuthForm/LoginForm';
+import RegisterForm from '../../components/authForm/RegisterForm';
+import LoginForm from '../../components/authForm/LoginForm';
 import { useLocation } from 'react-router-dom';
 
 const AuthPage = () => {
