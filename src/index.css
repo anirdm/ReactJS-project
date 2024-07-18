@@ -2,3 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  --light-gray: #F4F5F0;
+  --gray: #ABA9A9;
+  --blue: #5EC2F5;
+  --nav-color: #F4F5F0;
+}
+
+h1 {
+  font-size: 2.5em;
+  font-weight: 700;
+  margin: 10px 0px;
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: 500;
+  margin: 10px 0px;
+}
+
+a {
+  color: #5EC2F5;
+}
+
+button {
+  width: fit-content;
+  font-size: 15px;
+  font-weight: 700;
+  color: white;
+  margin-right: 5px;
+  padding: 10px 50px;
+  background-color: var(--blue);
+  border-radius: 15px;
+  border: none;
+  box-shadow: 0 5px 5px 0 rgba(138, 138, 138, 0.2), 0 5px 5px 0 rgba(138, 138, 138, 0.2);
+}
+
+button:hover {
+  background-color: #4EABDB;
+  cursor: pointer;
+}
+
+input {
+  width: 20em;
+  background-color: var(--light-gray);
+  border: var(--light-gray) 1.5px #D3D3D3;
+  border-radius: 1em;
+  padding: 10px;
+  font-size: medium;
+  font-weight: 500;
+}
