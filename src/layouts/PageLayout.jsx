@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import NavBar from "../components/navBar/NavBar";
+import SearchBar from "../components/searchBar/SearchBar";
 
 const PageLayout = ({ children }) => {
     const { pathname } = useLocation();
@@ -11,6 +12,9 @@ const PageLayout = ({ children }) => {
                 <NavBar />      
             ) : null }
             <div className="flex-1">
+                { pathname !== '/auth/register' && pathname !== '/auth/login' ? (
+                    <SearchBar />      
+                ) : null }
                 {children}
             </div>
         </div>

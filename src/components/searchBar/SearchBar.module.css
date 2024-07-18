@@ -1,0 +1,19 @@
+.searchBar {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: white;
+    padding: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.searchBar input {
+    width: 30vw;
+    box-shadow: 0 5px 5px 0 rgba(138, 138, 138, 0.2), 0 5px 5px 0 rgba(138, 138, 138, 0.2);
+}
+
+.searchBar input:hover {
+    background-color: #ecede7;
+}
