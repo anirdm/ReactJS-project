@@ -1,0 +1,20 @@
+.card {
+    width: fit-content;
+    height: fit-content;
+}
+
+.card img {
+    margin-bottom: 10px;
+    width: 15em;
+    border-radius: 1em;
+    max-width: 100%;
+}
+
+.card img:hover {
+    -webkit-filter: brightness(50%);
+    -webkit-transition: all 0.1s ease;
+    -moz-transition: all 0.1s ease;
+    -o-transition: all 0.1s ease;
+    -ms-transition: all 0.1s ease;
+    transition: all 0.1s ease; 
+}
