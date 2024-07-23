@@ -10,6 +10,7 @@
         "comments": 3,
         "likes": 15,
         "owner": "User1",
+        "ownerImg": "/profile-pic.jfif",
         "image": "/post1.jfif"
     },
     {
@@ -23,6 +24,7 @@
         "comments": 5,
         "likes": 25,
         "owner": "User2",
+        "ownerImg": "/profile-pic.jfif",
         "image": "/post2.jfif"
     },
     {
@@ -36,6 +38,7 @@
         "comments": 7,
         "likes": 30,
         "owner": "User3",
+        "ownerImg": "/profile-pic.jfif",
         "image": "/post3.jfif"
     },
     {
@@ -49,6 +52,7 @@
         "comments": 2,
         "likes": 10,
         "owner": "User4",
+        "ownerImg": "/profile-pic.jfif",
         "image": "/post4.jfif"
     },
     {
@@ -62,6 +66,7 @@
         "comments": 8,
         "likes": 40,
         "owner": "User5",
+        "ownerImg": "/profile-pic.jfif",
         "image": "/post5.jfif"
     },
     {
@@ -74,6 +79,7 @@
         "comments": 6,
         "likes": 20,
         "owner": "User6",
+        "ownerImg": "/profile-pic.jfif",
         "image": "/post6.jfif"
     },
     {
@@ -86,6 +92,7 @@
         "comments": 4,
         "likes": 35,
         "owner": "User7",
+        "ownerImg": "/profile-pic.jfif",
         "image": "/post7.jfif"
     },
     {
@@ -99,6 +106,7 @@
         "comments": 9,
         "likes": 50,
         "owner": "User8",
+        "ownerImg": "/profile-pic.jfif",
         "image": "/post8.jfif"
     }
 ]

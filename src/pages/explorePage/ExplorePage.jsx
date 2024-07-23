@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
 import FeedItem from "../../components/feedItem/FeedItem";
-import fetchPosts from "../../services/fetchPosts";
+import { fetchPosts } from "../../services/fetchPosts";
 
 const ExplorePage = () => {
   const [posts, setPosts] = useState([]);
@@ -14,7 +14,6 @@ const ExplorePage = () => {
         setPosts(postsData);
       } catch (error) {
         console.log(error);
-        console.log('Nice');
       } 
     };
 

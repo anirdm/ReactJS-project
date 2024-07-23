@@ -24,6 +24,14 @@ h2 {
   margin: 10px 0px;
 }
 
+h3 {
+  font-size: 1.25em;
+}
+
+/*span {
+  color: var(--gray);
+}*/
+
 .primary-button {
   width: fit-content;
   font-size: 15px;
@@ -40,6 +48,12 @@ h2 {
 .primary-button:hover {
   background-color: #4EABDB;
   cursor: pointer;
+}
+
+footer .primary-button {
+  padding: 5px 15px;
+  border-radius: 25px;
+
 }
 
 input {
