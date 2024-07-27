@@ -7,14 +7,9 @@ const LoginForm = () => {
         password: ''
     });
 
-    const handleAuth = (e) => {
-        e.preventDefault();
-        /**/ 
-    }
-
     return (
         <div>
-            <form onSubmit={handleAuth} className="flex flex-col border border-blue-mana rounded-lg w-fit p-6 shadow-lg justify-center">
+            <form  className="flex flex-col border border-blue-mana rounded-lg w-fit p-6 shadow-lg justify-center">
                 <div>
                     <h1>Login</h1>
                     <h2>Let's sign you in</h2>
