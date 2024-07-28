@@ -19,12 +19,14 @@ export const useUserAuth = () => {
 // AuthProvider component to wrap the application and provide context values
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
     // Set up authentication state listener
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
+            setLoading(false);
         });
 
         return () => unsubscribe();
@@ -61,6 +63,7 @@ export const AuthProvider = ({ children }) => {
             setUser(user);
             setError(''); // Clear error on success
         } catch (err) {
+            setError(err);
             throw new Error(err);
         }
     }
@@ -71,7 +74,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ user, signUp, logOut, error }}>
+        <AuthContext.Provider value={{ user, signUp, logOut, error, loading }}>
             {children}
         </AuthContext.Provider>
     );

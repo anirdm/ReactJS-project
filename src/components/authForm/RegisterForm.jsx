@@ -20,8 +20,8 @@ const RegisterForm = () => {
         try {
             await signUp(inputs);
             navigate('/');
-        } catch (err) {
-            setErr(error);
+        } catch (error) {
+            setErr(error.message);
         }
     }
 
@@ -79,7 +79,7 @@ const RegisterForm = () => {
                     />
 
                     { error && (
-                       <p className="text-red-500 mt-2">{error}</p>
+                       <p className="text-red-500 mt-2">{err}</p>
                     )}
 
                     <button 
