@@ -38,8 +38,7 @@ export const AuthProvider = ({ children }) => {
         );
 
         if (trimmedInputs.password !== trimmedInputs.rePassword) {
-            setError('Passwords do not match');
-            return;
+            throw new Error('Passwords do not match');
         }
 
         try {
@@ -61,10 +60,14 @@ export const AuthProvider = ({ children }) => {
             await setDoc(doc(db, "users", newUser.user.uid), user);
             localStorage.setItem('user-info', JSON.stringify(user));
             setUser(user);
-            setError(''); // Clear error on success
         } catch (err) {
-            setError(err);
-            throw new Error(err);
+            if (err.code === 'auth/email-already-in-use') {
+                throw new Error('This email address is already associated with an account. Please try logging in or use a different email address.');
+            } else if (err.code === 'auth/weak-password') {
+                throw new Error('Password should be at least 6 characters.');
+            } else {
+                throw new Error(err.message);
+            }      
         }
     }
 

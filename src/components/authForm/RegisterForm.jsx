@@ -78,8 +78,8 @@ const RegisterForm = () => {
                         required
                     />
 
-                    { error && (
-                       <p className="text-red-500 mt-2">{err}</p>
+                    { err && (
+                       <p className="text-red-500 text-sm mt-1 w-96 break-word">{err}</p>
                     )}
 
                     <button 
