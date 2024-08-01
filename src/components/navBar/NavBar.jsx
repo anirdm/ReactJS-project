@@ -7,68 +7,60 @@ import { useNavigate, NavLink } from 'react-router-dom';
 import UserNavBarLinks from './user/UserNavBarLinks';
 
 const NavBar = () => {
-    const { user, logOut, loading, error } = useUserAuth();
+    const { user, logOut, error } = useUserAuth();
     const navigate = useNavigate();
 
     const handleLogout = async () => {
         try {
             await logOut();
             navigate('/auth/login');
-        } catch(err) {
-            /**/ 
+        } catch (err) {
+            /**/
         }
     }
 
     return (
         <nav className='flex flex-col justify-between sticky top-0 bg-bright-white shadow-md-nav w-48 h-screen z-50'>
-            {loading
-                ? null
-                : (
-                    <>
-                        <div>
-                            <Logo className="w-28" />
-                            <section className='flex flex-col text-lg space-y-6 justify-between m-5'>
+            <div>
+                <Logo className="w-28" />
+                <section className='flex flex-col text-lg space-y-6 justify-between m-5'>
+                    <NavLink
+                        to='/'
+                        className='flex flex-row items-center gap-3 hover:text-flagstone transition-colors text-xl'
+                    >
+                        <AiOutlineCompass size={25} />
+                        Discover
+                    </NavLink>
+                    {user
+                        ? <UserNavBarLinks />
+                        : (
+                            <>
                                 <NavLink
-                                    to='/'
-                                    className='flex flex-row items-center gap-3 hover:text-flagstone transition-colors text-xl'
+                                    to='/auth/register'
+                                    className='hover:text-flagstone transition-colors text-xl'
                                 >
-                                    <AiOutlineCompass size={25} />
-                                    Discover
+                                    Register
                                 </NavLink>
-                                {user
-                                    ? <UserNavBarLinks />
-                                    : (
-                                        <>
-                                            <NavLink
-                                                to='/auth/register'
-                                                className='hover:text-flagstone transition-colors text-xl'
-                                            >
-                                                Register
-                                            </NavLink>
-                                            <NavLink
-                                                to='/auth/login'
-                                                className='hover:text-flagstone transition-colors text-xl'
-                                            >
-                                                Login
-                                            </NavLink>
-                                        </>
-                                    )
-                                }
-                            </section>
-                        </div>
-                        {user
-                            ? (
-
-                                <button
-                                    className='justify-self-end hover:text-flagstone transition-colors text-xl m-5'
-                                    onClick={handleLogout}
-                                > <IoLogOutSharp size={35} />
-                                </button>
-                            )
-                            : null
-                        }
-                    </>
+                                <NavLink
+                                    to='/auth/login'
+                                    className='hover:text-flagstone transition-colors text-xl'
+                                >
+                                    Login
+                                </NavLink>
+                            </>
+                        )
+                    }
+                </section>
+            </div>
+            {user
+                ? (
+                    <button
+                        className='justify-self-end hover:text-flagstone transition-colors text-xl m-5'
+                        onClick={handleLogout}
+                    > <IoLogOutSharp size={35} />
+                    </button>
                 )
+                : null
             }
         </nav>
     )

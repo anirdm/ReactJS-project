@@ -1,14 +1,9 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
-import { setDoc, doc } from 'firebase/firestore';
+import { setDoc, getDoc, doc } from 'firebase/firestore';
 import { auth, db } from '../firebase/firebaseConfig';
 
 // Create the AuthContext
-// createContext(
-//userId: ''
-//email: ''
-//...
-//)
 const AuthContext = createContext();
 
 // Custom hook to use the AuthContext
@@ -22,14 +17,11 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
-    // Set up authentication state listener
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-            setLoading(false);
-        });
-
-        return () => unsubscribe();
+        const storedUser = localStorage.getItem("user-info");
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
     }, []);
 
     const signUp = async (inputs) => {
@@ -73,11 +65,17 @@ export const AuthProvider = ({ children }) => {
 
     const login = async ({ email, password }) => {
         try {
-            await signInWithEmailAndPassword(auth, email, password);
-        } catch (err) {      
-            setError(err);
-            throw new Error(err);
-        } 
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
+
+            if (userDoc.exists()) {
+                const user = userDoc.data();
+                localStorage.setItem('user-info', JSON.stringify(user));
+                setUser(user);
+            }
+        } catch (err) {
+            throw new Error(err.message);
+        }
     }
 
     const logOut = async () => {
@@ -85,6 +83,7 @@ export const AuthProvider = ({ children }) => {
         try {
             await signOut(auth);
             localStorage.removeItem('user-info');
+            setUser(null);
         } catch(err) {
             setError(err);
             throw new Error(err.message);

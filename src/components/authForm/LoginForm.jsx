@@ -10,6 +10,7 @@ const LoginForm = () => {
     });
 
     const { login, error, loading } = useUserAuth();
+    const [err, setErr] = useState('');
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -18,8 +19,8 @@ const LoginForm = () => {
         try {
             await login(inputs);
             navigate('/');         
-        } catch (err) {
-            /**/ 
+        } catch (error) {
+            setErr(error.message);
         }
     }
 
@@ -51,8 +52,8 @@ const LoginForm = () => {
                         required
                     />
 
-                    {error && (
-                        <p className="text-red-500 text-sm mt-1 w-96 break-word">{error.message}</p>
+                    {err && (
+                        <p className="text-red-500 text-sm mt-1 w-96 break-word">{err}</p>
                     )}
 
                     <button
