@@ -7,12 +7,16 @@ import { useNavigate, NavLink } from 'react-router-dom';
 import UserNavBarLinks from './user/UserNavBarLinks';
 
 const NavBar = () => {
-    const { user, logOut, loading } = useUserAuth();
+    const { user, logOut, loading, error } = useUserAuth();
     const navigate = useNavigate();
 
-    const logOutHandler = async () => {
-        await logOut();
-        navigate('/auth/login');
+    const handleLogout = async () => {
+        try {
+            await logOut();
+            navigate('/auth/login');
+        } catch(err) {
+            /**/ 
+        }
     }
 
     return (
@@ -57,7 +61,7 @@ const NavBar = () => {
 
                                 <button
                                     className='justify-self-end hover:text-flagstone transition-colors text-xl m-5'
-                                    onClick={logOutHandler}
+                                    onClick={handleLogout}
                                 > <IoLogOutSharp size={35} />
                                 </button>
                             )
