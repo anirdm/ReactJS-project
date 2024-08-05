@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useUserAuth } from '../../contexts/AuthContext';
 import styles from './AuthForm.module.css'
 
@@ -9,7 +9,7 @@ const LoginForm = () => {
         password: ''
     });
 
-    const { login, error, loading } = useUserAuth();
+    const { login } = useUserAuth();
     const [err, setErr] = useState('');
     const navigate = useNavigate();
 
@@ -68,7 +68,7 @@ const LoginForm = () => {
             <div className={styles.authBlock}>
                 <p>
                     Don't have an account?
-                    <a href="/auth/register" className='text-blue-mana font-bold ml-2'>Register</a>
+                    <Link to='/auth/register' className='text-blue-mana font-bold ml-2'>Register</Link>
                 </p>
             </div>
         </div>

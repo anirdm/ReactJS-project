@@ -7,7 +7,7 @@ import { useNavigate, NavLink } from 'react-router-dom';
 import UserNavBarLinks from './user/UserNavBarLinks';
 
 const NavBar = () => {
-    const { user, logOut, error } = useUserAuth();
+    const { user, logOut, loading } = useUserAuth();
     const navigate = useNavigate();
 
     const handleLogout = async () => {
@@ -23,34 +23,37 @@ const NavBar = () => {
         <nav className='flex flex-col justify-between sticky top-0 bg-bright-white shadow-md-nav w-48 h-screen z-50'>
             <div>
                 <Logo className="w-28" />
-                <section className='flex flex-col text-lg space-y-6 justify-between m-5'>
-                    <NavLink
-                        to='/'
-                        className='flex flex-row items-center gap-3 hover:text-flagstone transition-colors text-xl'
-                    >
-                        <AiOutlineCompass size={25} />
-                        Discover
-                    </NavLink>
-                    {user
-                        ? <UserNavBarLinks />
-                        : (
-                            <>
-                                <NavLink
-                                    to='/auth/register'
-                                    className='hover:text-flagstone transition-colors text-xl'
-                                >
-                                    Register
-                                </NavLink>
-                                <NavLink
-                                    to='/auth/login'
-                                    className='hover:text-flagstone transition-colors text-xl'
-                                >
-                                    Login
-                                </NavLink>
-                            </>
-                        )
-                    }
-                </section>
+                {loading ? null : (
+                    <section className='flex flex-col text-lg space-y-6 justify-between m-5'>
+                        <NavLink
+                            to='/'
+                            className='flex flex-row items-center gap-3 hover:text-flagstone transition-colors text-xl'
+                        >
+                            <AiOutlineCompass size={25} />
+                            Discover
+                        </NavLink>
+                        {user
+                            ? <UserNavBarLinks />
+                            : (
+                                <>
+                                    <NavLink
+                                        to='/auth/register'
+                                        className='hover:text-flagstone transition-colors text-xl'
+                                    >
+                                        Register
+                                    </NavLink>
+                                    <NavLink
+                                        to='/auth/login'
+                                        className='hover:text-flagstone transition-colors text-xl'
+                                    >
+                                        Login
+                                    </NavLink>
+                                </>
+                            )
+                        }
+                    </section>
+                )}
+
             </div>
             {user
                 ? (

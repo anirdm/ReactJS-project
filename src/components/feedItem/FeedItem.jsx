@@ -1,11 +1,12 @@
 import styles from './FeedItem.module.css'
+import { Link } from 'react-router-dom';
 
 const FeedItem = ({_id, image}) => {
     return (
         <div className={styles.card}>
-            <a href={`/post/${_id}`}>
+            <Link to={`/post/${_id}`}>
                 <img src={image} />
-            </a>
+            </Link>
         </div>     
     )  
 }

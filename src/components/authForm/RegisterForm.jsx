@@ -1,7 +1,7 @@
 import styles from './AuthForm.module.css'
 import { useState } from 'react';
 import { useUserAuth } from '../../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const RegisterForm = () => {
     const [ inputs, setInputs ] = useState({
@@ -11,7 +11,7 @@ const RegisterForm = () => {
         password: '',
         rePassword: ''
     });
-    const { signUp, error } = useUserAuth();
+    const { signUp } = useUserAuth();
     const [err, setErr] = useState('');
     const navigate = useNavigate();
 
@@ -93,7 +93,7 @@ const RegisterForm = () => {
             <div className={styles.authBlock}>
                 <p>
                     Already have an account?
-                    <a href="/auth/login" className='text-blue-mana font-bold ml-2'>Login</a>
+                    <Link to="/auth/login" className='text-blue-mana font-bold ml-2'>Login</Link>
                 </p>
             </div>
         </div>
