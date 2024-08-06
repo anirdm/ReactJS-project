@@ -6,7 +6,7 @@ import useGetUserProfileByUsername from '../../hooks/useGetUserProfileByUsername
 import { useUserProfile } from '../../contexts/UserProfileContext'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import Spinner from '../../components/Spinner/Spinner'
+import Spinner from '../../components/spinner/Spinner'
 import { useUserAuth } from '../../contexts/AuthContext'
 
 const ProfilePage = () => {

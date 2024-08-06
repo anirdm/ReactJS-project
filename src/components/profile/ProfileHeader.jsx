@@ -1,6 +1,7 @@
 import { useUserProfile } from "../../contexts/UserProfileContext";
 import { FiEdit } from "react-icons/fi";
 import { useUserAuth } from "../../contexts/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
 
 const ProfileHeader = () => {
     const { userProfile } = useUserProfile();
@@ -8,6 +9,11 @@ const ProfileHeader = () => {
     // user == authUser
     const profileOwner = user && user.username === userProfile.username;
     const nonProfileOwnerAuthUser =user && user.username !== userProfile.username;
+    const navigate = useNavigate();
+
+    const handleEditProfile = () => {
+        navigate(`/${user.username}/edit`, { state: { userProfile } });
+    }
 
     return (
         <header className="profile-header flex md:flex-row min-[320px]:flex-col items-center justify-between ">
@@ -21,7 +27,9 @@ const ProfileHeader = () => {
             </div>
             <div className='flex md:flex-col min-[320px]:flex-col-reverse md:items-end min-[320px]:items-center'>
                 { profileOwner && (
-                    <button>
+                    <button
+                        onClick={handleEditProfile}
+                    >
                         <FiEdit size={30} />
                     </button>               
                 )}

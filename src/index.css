@@ -50,6 +50,24 @@ h3 {
   cursor: pointer;
 }
 
+.secondary-button {
+  width: fit-content;
+  font-size: 15px;
+  font-weight: 500;
+  color: black;
+  margin-right: 5px;
+  padding: 10px 45px;
+  background-color: rgb(234, 233, 233);
+  border-radius: 15px;
+  border: none;
+  box-shadow: 0 5px 5px 0 rgba(138, 138, 138, 0.2), 0 5px 5px 0 rgba(138, 138, 138, 0.2);
+}
+
+.secondary-button:hover {
+  background-color: rgb(214, 211, 211);;
+  cursor: pointer;
+}
+
 footer .primary-button {
   padding: 5px 15px;
   border-radius: 25px;

@@ -10,12 +10,12 @@ const CreatePost = () => {
     });
 
     return (
-        <div className='flex justify-center items-center mt-12'>
+        <div className='flex justify-center items-center mt-6'>
             <form className='flex flex-col border border-blue-mana rounded-lg w-fit p-6 shadow-lg justify-center'>
-                <h1 className='font-medium mb-5'>Create Post</h1>                  
+                <h2 className='font-medium mb-6'>Create Post</h2>                  
                     <div className="flex flex-col gap-6">
                         <div className='flex flex-col gap-3'>
-                            <label className='text-lg'>Title</label>
+                            <label>Title</label>
                             <input
                                 type="text"
                                 placeholder="Add a title"
@@ -27,7 +27,7 @@ const CreatePost = () => {
                         </div>
 
                         <div className='flex flex-col gap-3'>
-                            <label className='text-lg'>Description</label>
+                            <label>Description</label>
                             <input
                                 type="text"
                                 placeholder="Add a description"

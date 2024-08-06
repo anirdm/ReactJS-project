@@ -6,7 +6,6 @@ import { useUserAuth } from "../../../contexts/AuthContext";
 
 const UserNavBarLinks = () => {
     const { user, loading } = useUserAuth();
-    console.log(user);
 
     return (
         <>
