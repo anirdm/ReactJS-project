@@ -14,13 +14,8 @@ const ProfilePage = () => {
     const { userProfile } = useGetUserProfileByUsername(username);
     const { loading } = useUserAuth();
 
-    if(loading) {
-        return <Spinner />;
-    }
-
-    if (!userProfile) {
-        return <UserNotFound />;
-    }
+    if(loading) return <Spinner />;  
+    if (!userProfile) return <UserNotFound />;
 
     return (
         <>
@@ -35,11 +30,14 @@ export default ProfilePage;
 
 const UserNotFound = () => {
     return (
-        <>
-            <h1>User not Found</h1>
-            <Link to='/'>
-                Home
+        <div className='flex flex-col items-center h-5/6 justify-center'>
+            <h1 className='font-medium mb-5'>User not Found</h1>
+            <Link 
+                to='/'
+                className='text-blue-mana'
+            >
+                Go to Home
             </Link>
-        </>
+        </div>
     )
 }

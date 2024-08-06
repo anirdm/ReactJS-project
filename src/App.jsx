@@ -26,8 +26,8 @@ function App() {
                         <Route path="/auth/register" element={!user ? <AuthPage /> : <Navigate to='/' />} />
                         <Route path="/auth/login" element={!user ? <AuthPage /> : <Navigate to='/' />} />
                         <Route path="/post/:_id" element={<DetailsPage />} />
-                        <Route path="/:username" element={loading ? <Spinner /> : <ProfilePage />} />
-                        <Route path="/:username/edit" element={loading ? <Spinner /> : user ? <EditProfile /> : <Navigate to='/auth/login' />} />
+                        <Route path="/:username" element={<ProfilePage />} />
+                        <Route path="/:username/edit" element={ user ? <EditProfile /> : <Navigate to='/auth/login' />} />
                         <Route path="/post/create" element={loading ? <Spinner /> : user ? <CreatePost /> : <Navigate to='/auth/login' />} />
                     </Routes>
                 </UserProfileProvider>

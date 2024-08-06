@@ -2,13 +2,16 @@ import { useUserProfile } from "../../contexts/UserProfileContext";
 import { FiEdit } from "react-icons/fi";
 import { useUserAuth } from "../../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import useFollowAndUnfollowUser from "../../hooks/useFollowAndUnfollowUser";
 
 const ProfileHeader = () => {
     const { userProfile } = useUserProfile();
     const { user } = useUserAuth();
+    const { handleFollowOrUnfollowUser, isUpdating, isFollowing } = useFollowAndUnfollowUser(userProfile?.uid);
     // user == authUser
     const profileOwner = user && user.username === userProfile.username;
     const nonProfileOwnerAuthUser =user && user.username !== userProfile.username;
+
     const navigate = useNavigate();
 
     const handleEditProfile = () => {
@@ -35,8 +38,11 @@ const ProfileHeader = () => {
                 )}
 
                 { nonProfileOwnerAuthUser && (
-                    <button className="primary-button">
-                        Follow
+                    <button 
+                        className={isFollowing ? 'button-unfollow' : 'primary-button'}
+                        onClick={handleFollowOrUnfollowUser}
+                    >
+                        { isFollowing ? 'Unfollow' : 'Follow'}
                     </button>
                 )}
                

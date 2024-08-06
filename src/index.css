@@ -68,6 +68,23 @@ h3 {
   cursor: pointer;
 }
 
+.button-unfollow {
+  width: fit-content;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--blue);
+  margin-right: 5px;
+  padding: 10px 45px;
+  background-color: transparent;
+  border-radius: 15px;
+  border: 1px solid var(--blue);
+  box-shadow: 0 5px 5px 0 rgba(138, 138, 138, 0.2), 0 5px 5px 0 rgba(138, 138, 138, 0.2);
+}
+
+.button-unfollow:hover{
+  background-color: #f7f7f7;
+}
+
 footer .primary-button {
   padding: 5px 15px;
   border-radius: 25px;
