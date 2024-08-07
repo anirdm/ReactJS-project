@@ -52,7 +52,7 @@ const PostCardContent = ({ post }) => {
                         ) : null}
                     </div>
 
-                    {user.uid === userProfile.uid && (
+                    {user.uid && (
                         <div className="flex gap-5 mr-2.5">
                             <button               
                             >
@@ -79,7 +79,7 @@ const PostCardContent = ({ post }) => {
                     className="flex items-center mb-2.5 mt-5 gap-2.5"
                     onClick={() => navigate(`/${userProfile.username}`)}
                 >
-                    <img className='w-12 h-12 rounded-full object-cover' src={userProfile.profilePicURL} alt="profile-pic" />
+                    <img className='w-12 h-12 rounded-full object-cover' src={'/pfp-2.jfif'} alt="profile-pic" />
                     <div className="">
                         <span>By {userProfile.name}</span>
                     </div>

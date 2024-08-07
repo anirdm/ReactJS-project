@@ -25,7 +25,7 @@ function App() {
                 <PostProvider>
                     <UserProfileProvider>
                         <Routes>
-                            <Route path="/" element={<ExplorePage />} />
+                            <Route path="/" element={loading ? <Spinner /> : <ExplorePage />} />
                             <Route path="/auth/register" element={!user ? <AuthPage /> : <Navigate to='/' />} />
                             <Route path="/auth/login" element={!user ? <AuthPage /> : <Navigate to='/' />} />
                             <Route path="/post/:_id" element={<DetailsPage />} />
