@@ -8,6 +8,7 @@ import CreatePost from "./components/createPost/CreatePost"
 import EditProfile from "./components/profile/EditProfile"
 import { useUserAuth } from "./contexts/AuthContext"
 import { UserProfileProvider } from "./contexts/UserProfileContext"
+import { PostProvider } from "./contexts/PostContext"
 import Spinner from "./components/spinner/Spinner"
 
 function App() {
@@ -19,18 +20,20 @@ function App() {
 
     return (
         <BrowserRouter>
-            <PageLayout>
-                <UserProfileProvider>
-                    <Routes>
-                        <Route path="/" element={<ExplorePage />} />
-                        <Route path="/auth/register" element={!user ? <AuthPage /> : <Navigate to='/' />} />
-                        <Route path="/auth/login" element={!user ? <AuthPage /> : <Navigate to='/' />} />
-                        <Route path="/post/:_id" element={<DetailsPage />} />
-                        <Route path="/:username" element={<ProfilePage />} />
-                        <Route path="/:username/edit" element={ user ? <EditProfile /> : <Navigate to='/auth/login' />} />
-                        <Route path="/post/create" element={loading ? <Spinner /> : user ? <CreatePost /> : <Navigate to='/auth/login' />} />
-                    </Routes>
-                </UserProfileProvider>
+            <PageLayout>    
+                <PostProvider>
+                    <UserProfileProvider>
+                        <Routes>
+                            <Route path="/" element={<ExplorePage />} />
+                            <Route path="/auth/register" element={!user ? <AuthPage /> : <Navigate to='/' />} />
+                            <Route path="/auth/login" element={!user ? <AuthPage /> : <Navigate to='/' />} />
+                            <Route path="/post/:_id" element={<DetailsPage />} />
+                            <Route path="/:username" element={<ProfilePage />} />
+                            <Route path="/:username/edit" element={ user ? <EditProfile /> : <Navigate to='/auth/login' />} />
+                            <Route path="/post/create" element={loading ? <Spinner /> : user ? <CreatePost /> : <Navigate to='/auth/login' />} />
+                        </Routes>
+                    </UserProfileProvider>
+                </PostProvider>           
             </PageLayout>
         </BrowserRouter>
     )

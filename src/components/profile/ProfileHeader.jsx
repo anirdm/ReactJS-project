@@ -46,11 +46,6 @@ const ProfileHeader = () => {
                     </button>
                 )}
                
-            {/*<button className={` ${isFollowing ? styles.buttonUnfollow : ''}`}
-                            onClick={toggleFollow}
-                        >
-                            {isFollowing ? 'Unfollow' : 'Follow'}
-                        </button>*/}
             <div className="flex text-center mt-5 gap-3 text-flagstone">
                 <div className="column">
                     <p>{userProfile.posts.length} posts</p>

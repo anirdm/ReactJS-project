@@ -35,7 +35,7 @@ const EditProfile = () => {
         try {
             editProfile(inputs, selectedFile);
             setSelectedFile(null);
-            navigate(`/${userProfile.username}`)
+            navigate(`/${userProfile.username}`);
         } catch (err) {
             console.log(err);
             /* */
@@ -118,7 +118,7 @@ const EditProfile = () => {
 
                     {error && <p className='text-red-500'>{error}</p>}
 
-                    <div className='flex justify-end gap-2 mt-3'>
+                    <div className='flex justify-end gap-2'>
                         <button
                             className='secondary-button'
                             type='button'
