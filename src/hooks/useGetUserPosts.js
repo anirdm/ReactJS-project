@@ -40,7 +40,11 @@ const useGetUserPosts = () => {
         getPosts();
     }, [setPosts, userProfile]);
 
-    return { isLoading, posts };
+    const getPostById = (id) => {
+        return posts.find(post => post.id === id);
+    };
+
+    return { isLoading, posts, getPostById };
 }
 
 

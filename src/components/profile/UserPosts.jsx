@@ -20,7 +20,6 @@ const UserPosts = () => {
                     >
                         <Masonry style={{ gap: '15px' }}>
                             {posts.map(post => <FeedItem key={post.id} post={post} _id={post.id} />)}
-                            {console.log(posts)}
                         </Masonry>
                     </ResponsiveMasonry>
                 )
