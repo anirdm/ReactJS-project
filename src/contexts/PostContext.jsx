@@ -4,7 +4,7 @@ import { createContext, useContext, useState } from "react";
 const PostContext = createContext();
 
 // Custom hook to use the AuthContext
-export const usePost = () => {
+export const usePosts = () => {
     return useContext(PostContext);
 }
 

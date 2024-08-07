@@ -4,7 +4,7 @@ import { LuUpload } from "react-icons/lu";
 import { FiEdit } from "react-icons/fi";
 import usePreviewImg from '../../hooks/usePreviewImg';
 import { useUserAuth } from '../../contexts/AuthContext';
-import { usePost } from '../../contexts/PostContext';
+import { usePosts } from '../../contexts/PostContext';
 import { useLocation } from 'react-router-dom';
 import { addDoc, collection, updateDoc, arrayUnion, doc } from 'firebase/firestore';
 import { db, storage } from '../../firebase/firebaseConfig';
@@ -144,7 +144,7 @@ const useCreatePost = () => {
     const imageRef = useRef(null);
     const { handleImageChange, selectedFile, setSelectedFile, error } = usePreviewImg();
     const { user } = useUserAuth();
-    const { createPost } = usePost();
+    const { createPost } = usePosts();
     const { pathname } = useLocation();
 
     const [isLoading, setIsLoading] = useState(false);
@@ -156,8 +156,6 @@ const useCreatePost = () => {
             throw new Error('Please select a file');
         }
 
-        console.log(inputs);
-
         setIsLoading(true);
 
         const newPost = {
@@ -166,6 +164,7 @@ const useCreatePost = () => {
             likes: [],
             comments: [],
             createdBy: user.uid,
+            createdAt: Date.now()
         }
 
         try {

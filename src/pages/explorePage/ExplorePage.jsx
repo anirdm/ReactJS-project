@@ -22,7 +22,8 @@ const ExplorePage = () => {
 
   return (
     <div className="feed">
-      <ResponsiveMasonry
+      <h1>Under construction</h1>
+      {/*<ResponsiveMasonry
         columnsCountBreakPoints={{ 350: 2, 750: 3, 900: 5 }}
       >
         <Masonry style={{gap: '15px'}}>
@@ -30,7 +31,7 @@ const ExplorePage = () => {
             <FeedItem key={post._id} {...post} />
           ))}
         </Masonry>
-      </ResponsiveMasonry>
+      </ResponsiveMasonry>*/}
     </div>
   )
 }

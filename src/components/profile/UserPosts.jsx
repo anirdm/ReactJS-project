@@ -1,23 +1,31 @@
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
 import FeedItem from '../../components/feedItem/FeedItem'
+import useGetUserPosts from "../../hooks/useGetUserPosts"
 
 const UserPosts = () => {
+    const { isLoading, posts } = useGetUserPosts();
+
+    const noPostsFound = posts.length === 0;
+
     return (
         <section className='posts'>
-            <div className="flex justify-center  ">
-                <h2 className="mt-24 font-normal text-flagstone">Nothing to show...yet! (•ᴖ•｡)</h2> 
-
-            </div>
-            {/*<ResponsiveMasonry
-                columnsCountBreakPoints={{ 350: 2, 750: 3, 900: 5 }}
-            >
-                <Masonry style={{ gap: '15px' }}>
-                    <FeedItem _id='1' image='/post1.jfif' />
-                    <FeedItem _id='3' image='/post3.jfif' />
-                    <FeedItem _id='7' image='/post7.jfif' />
-                </Masonry>
-            </ResponsiveMasonry>*/}
-        </section>
+            {isLoading ? null :
+                noPostsFound ? (
+                    <div className="flex justify-center">
+                        <h2 className="mt-24 font-normal text-flagstone">Nothing to show...yet! (•ᴖ•｡)</h2>
+                    </div>
+                ) : (
+                    <ResponsiveMasonry
+                        columnsCountBreakPoints={{ 350: 2, 750: 3, 900: 5 }}
+                    >
+                        <Masonry style={{ gap: '15px' }}>
+                            {posts.map(post => <FeedItem key={post.id} post={post} _id={post.id} />)}
+                            {console.log(posts)}
+                        </Masonry>
+                    </ResponsiveMasonry>
+                )
+            }
+        </section >
     )
 }
 
