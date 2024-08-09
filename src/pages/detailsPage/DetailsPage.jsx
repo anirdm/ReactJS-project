@@ -36,7 +36,7 @@ const DetailsPage = () => {
 
   return (
     <div className="flex justify-center">
-      <PostCard post={post} />
+      <PostCard post={post}/>
     </div>
   )
 }

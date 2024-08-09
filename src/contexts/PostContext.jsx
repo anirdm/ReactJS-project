@@ -27,10 +27,22 @@ export const PostProvider = ({ children }) => {
         setPosts((prevPosts) => prevPosts.filter((post) => post.id !== id));
     };
 
-    //add comment
+    const addComment = (postId, comment) => {
+        setPosts((prevPosts) =>
+            prevPosts.map((post) => {
+                if (post.id === postId) {
+                    return {
+                        ...post,
+                        comments: [comment, ...post.comments],
+                    };
+                }
+                return post;
+            })
+        );
+    };
 
     return (
-        <PostContext.Provider value={{ posts, createPost, deletePost, editPost, setPosts }}>
+        <PostContext.Provider value={{ posts, createPost, deletePost, editPost, addComment, setPosts }}>
             {children}
         </PostContext.Provider>
     );
