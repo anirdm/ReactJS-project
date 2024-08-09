@@ -21,12 +21,12 @@ const PostCardContent = ({ post }) => {
     const navigate = useNavigate();
 
     const [isDeleting, setIsDeleting] = useState(false);
-    
+
     const { owner, loading } = useGetPostOwner(post.createdBy);
 
-    if(loading) {
-        return ;
-    } 
+    if (loading) {
+        return;
+    }
 
     const handleDeletePost = async () => {
         if (!window.confirm('Are you sure you want to delete this post?')) return;
@@ -62,20 +62,23 @@ const PostCardContent = ({ post }) => {
                         ) : null}
                     </div>
 
-                    {user.uid === owner.uid && (
-                        <div className="flex gap-5 mr-2.5">
-                            <button
-                                onClick={() => navigate(`/post/${post.id}/edit`)}
-                            >
-                                <FiEdit size={30} />
-                            </button>
-                            <button
-                                onClick={handleDeletePost}
-                            >
-                                <FaTrashCan size={30} />
-                            </button>
-                        </div>
+                    {user && (
+                        user.uid === owner.uid && (
+                            <div className="flex gap-5 mr-2.5">
+                                <button
+                                    onClick={() => navigate(`/post/${post.id}/edit`)}
+                                >
+                                    <FiEdit size={30} />
+                                </button>
+                                <button
+                                    onClick={handleDeletePost}
+                                >
+                                    <FaTrashCan size={30} />
+                                </button>
+                            </div>
+                        )
                     )}
+                    
                 </div>
 
                 {/*<div className='tags-container my-5 text-flagstone'>
@@ -90,7 +93,7 @@ const PostCardContent = ({ post }) => {
                     className="flex items-center mb-2.5 mt-5 gap-2.5"
                     onClick={() => navigate(`/${owner.username}`)}
                 >
-                    <img className='w-12 h-12 rounded-full object-cover' src={owner.profilePicURL}  alt="profile-pic" />
+                    <img className='w-12 h-12 rounded-full object-cover' src={owner.profilePicURL} alt="profile-pic" />
                     <div className="">
                         <span>By {owner.name}</span>
                     </div>
