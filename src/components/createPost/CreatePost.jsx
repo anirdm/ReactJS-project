@@ -47,7 +47,7 @@ const CreatePost = () => {
     }
 
     return (
-        <div className='flex justify-center items-center mt-6'>
+        <div className='flex justify-center items-center h-4/5 mt-6'>
             <form
                 action='post'
                 className='flex flex-col border border-blue-mana rounded-lg w-fit p-6 shadow-lg'
@@ -97,7 +97,6 @@ const CreatePost = () => {
                                     name="title"
                                     value={inputs.title}
                                     onChange={(e) => setInputs({ ...inputs, title: e.target.value })}
-                                    required
                                 />
                             </div>
 

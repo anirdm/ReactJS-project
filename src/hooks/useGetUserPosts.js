@@ -7,7 +7,7 @@ import { db } from '../firebase/firebaseConfig';
 const useGetUserPosts = () => {
     const [ isLoading, setIsLoading ] = useState(true);
     const { posts, setPosts } = usePosts();
-    const { userProfile }= useUserProfile();
+    const { userProfile } = useUserProfile();
 
     useEffect(() => {
         const getPosts = async () => {
@@ -41,7 +41,13 @@ const useGetUserPosts = () => {
     }, [setPosts, userProfile]);
 
     const getPostById = (id) => {
+        if(isLoading) {
+            return null;
+        }
+        
         return posts.find(post => post.id === id);
+        /*const res = posts.find(post => post.id === id);
+        console.log(res);*/
     };
 
     return { isLoading, posts, getPostById };

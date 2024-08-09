@@ -4,16 +4,26 @@ import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import usePreviewImg from '../../hooks/usePreviewImg';
 import useEditProfile from '../../hooks/useEditProfile';
 import useGetUserProfileByUsername from '../../hooks/useGetUserProfileByUsername';
+import { useUserAuth } from '../../contexts/AuthContext';
+import { useUserProfile } from '../../contexts/UserProfileContext';
 
 const EditProfile = () => {
-    const location = useLocation();
-
-    const { userProfile } = location.state || {};
-    /*const { userProfile }= useUserProfile();*/
-    /*const { userProfile } = useGetUserProfileByUsername(username);*/
+    const { user } = useUserAuth();
+    /*const { userProfile }= useUserProfile();
+    const { userProfile } = useUserProfile();*/
+    const { username } = useParams();
 
     const { handleImageChange, selectedFile, setSelectedFile, error } = usePreviewImg();
     const { editProfile } = useEditProfile();
+
+    if (username !== user.username) {
+        return (
+            <div className='flex flex-col items-center h-5/6 justify-center'>
+                <h2 className='font-normal mb-5'> HA! You thought!</h2>
+                <h2 className='text-blue-mana'>¬‿¬</h2>
+            </div>
+        )
+    }
 
     const [inputs, setInputs] = useState({
         bio: '',
@@ -35,7 +45,7 @@ const EditProfile = () => {
         try {
             editProfile(inputs, selectedFile);
             setSelectedFile(null);
-            navigate(`/${userProfile.username}`);
+            navigate(`/${user.username}`);
         } catch (err) {
             console.log(err);
             /* */
@@ -43,11 +53,11 @@ const EditProfile = () => {
     }
 
     const handleCancelClick = () => {
-        navigate(`/${userProfile.username}`)
+        navigate(`/${user.username}`)
     };
 
     return (
-        <div className='flex justify-center items-center mt-6'>
+        <div className='flex justify-center items-center h-4/5 mt-6'>
             <form
                 action='post'
                 className='flex flex-col border border-blue-mana rounded-lg w-fit p-6 shadow-lg justify-center'
@@ -67,12 +77,12 @@ const EditProfile = () => {
                         {/* Custom button */}
                         <div className='flex items-center gap-5'>
                             <img
-                                src={selectedFile || userProfile.profilePicURL}
+                                src={selectedFile || user.profilePicURL}
                                 alt="profile-pic"
                                 className='rounded-full w-14 h-14 object-cover'
                             />
                             <button
-                            type='button'
+                                type='button'
                                 className='primary-button w-fit h-fit'
                                 onClick={handleFileInputClick}
                             >
@@ -87,7 +97,7 @@ const EditProfile = () => {
                                 /*id=""*/
                                 placeholder='Add a bio'
                                 className='bg-bright-white rounded-xl h-20 resize-none p-2'
-                                value={inputs.bio || userProfile.bio}
+                                value={inputs.bio || user.bio}
                                 onChange={(e) => setInputs({ ...inputs, bio: e.target.value })}
                             >
                             </textarea>
@@ -99,7 +109,7 @@ const EditProfile = () => {
                                 type="text"
                                 placeholder=""
                                 name="name"
-                                value={inputs.name || userProfile.name}
+                                value={inputs.name || user.name}
                                 onChange={(e) => setInputs({ ...inputs, name: e.target.value })}
                             />
                         </div>

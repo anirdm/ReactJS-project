@@ -8,7 +8,7 @@ import useGetUserPosts from "../../hooks/useGetUserPosts";
 import useGetAllPosts from "../../hooks/useGetAllPosts";
 
 const ExplorePage = () => {
-  const { isLoading, allPosts }= useGetAllPosts();
+  const { isLoading, posts }= useGetAllPosts();
 
   return (
     <div className="feed">
@@ -16,7 +16,7 @@ const ExplorePage = () => {
         columnsCountBreakPoints={{ 350: 2, 750: 3, 900: 5 }}
       >
         <Masonry style={{ gap: '15px' }}>
-          {allPosts.map(post => <FeedItem key={post.id} post={post} _id={post.id} />)}
+          {posts.map(post => <FeedItem key={post.id} post={post} _id={post.id} />)}
         </Masonry>
       </ResponsiveMasonry>
     </div>

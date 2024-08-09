@@ -1,45 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs, query } from 'firebase/firestore';
 import { db } from '../firebase/firebaseConfig';
+import { usePosts } from '../contexts/PostContext';
 
 const useGetAllPosts = () => {
     const [isLoading, setIsLoading] = useState(true);
-    const [allPosts, setAllPosts] = useState([]);
+    const { posts, setPosts } = usePosts();
 
     useEffect(() => {
         const getAllPosts = async () => {
             setIsLoading(true);
-            setAllPosts([]);
+            setPosts([]);
 
             try {
                 const q = query(collection(db, 'posts'));
                 const querySnapshot = await getDocs(q);
 
-                const allPosts = [];
+                const posts = [];
                 querySnapshot.forEach(post => {
-                    allPosts.push({ ...post.data(), id: post.id });
+                    posts.push({ ...post.data(), id: post.id });
                 });
 
                 // Sort posts to have the latest post at the top
-                allPosts.sort((a, b) => b.createdAt - a.createdAt);
-                setAllPosts(allPosts);
+                posts.sort((a, b) => b.createdAt - a.createdAt);
+                setPosts(posts);
             } catch (error) {
-                setAllPosts([]);
+                setPosts([]);
             } finally {
                 setIsLoading(false);
             }
         };
 
-
-
         getAllPosts();
-    }, [setAllPosts]);
+    }, [setPosts]);
 
     const getPostById = (id) => {
-        return allPosts.find(post => post.id === id);
+        return posts.find(post => post.id === id);
     };
 
-    return { isLoading, allPosts, getPostById };
+    return { isLoading, posts, getPostById };
 };
 
 export default useGetAllPosts;

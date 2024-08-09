@@ -15,7 +15,7 @@ const ProfileHeader = () => {
     const navigate = useNavigate();
 
     const handleEditProfile = () => {
-        navigate(`/${user.username}/edit`, { state: { userProfile } });
+        navigate(`/${user.username}/edit`);
     }
 
     return (
@@ -25,7 +25,7 @@ const ProfileHeader = () => {
                 <div>
                     <h2 className='m-0'>{userProfile.name}</h2>
                     <h3 className='text-lg text-flagstone'>@{userProfile.username}</h3>
-                    <p className='text-sm break-words mt-5'>{userProfile.bio}</p>
+                    <p className='break-words mt-5'>{userProfile.bio}</p>
                 </div>
             </div>
             <div className='flex md:flex-col min-[320px]:flex-col-reverse md:items-end min-[320px]:items-center'>

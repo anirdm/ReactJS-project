@@ -8,7 +8,7 @@ const PostCard = ({ post }) => {
             <div className="post-image-container flex-1">
                 <img className='rounded-xl w-full' src={post.imageURL} alt="post-img" />
             </div>
-            <div className="post-info flex flex-col flex-1 h-full">
+            <div className="post-info flex flex-col flex-1 h-full justify-between">
                 <PostCardContent
                     post = {post}
                 />

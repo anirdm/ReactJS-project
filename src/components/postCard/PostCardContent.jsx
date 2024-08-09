@@ -6,20 +6,30 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { deleteObject, ref } from "firebase/storage";
 import { storage, db } from "../../firebase/firebaseConfig";
-import { arrayRemove, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { arrayRemove, deleteDoc, doc, updateDoc, getDoc } from "firebase/firestore";
 import { usePosts } from "../../contexts/PostContext";
+import { useEffect } from "react";
+import useGetPostOwner from "../../hooks/useGetPostOwner";
 
 const PostCardContent = ({ post }) => {
-    const { userProfile } = useUserProfile();
+
+    // Call custom hook at the top level
+    /*const { owner } = useGetPostOwner(post.createdBy); */
+
     const { user } = useUserAuth();
     const { deletePost } = usePosts();
-
-    const [ isDeleting, setIsDeleting ] = useState(false);
-
     const navigate = useNavigate();
 
+    const [isDeleting, setIsDeleting] = useState(false);
+    
+    const { owner, loading } = useGetPostOwner(post.createdBy);
+
+    if(loading) {
+        return ;
+    } 
+
     const handleDeletePost = async () => {
-        if(!window.confirm('Are you sure you want to delete this post?')) return;
+        if (!window.confirm('Are you sure you want to delete this post?')) return;
         // if while deleting the user clicks again
         if (isDeleting) return;
 
@@ -34,7 +44,7 @@ const PostCardContent = ({ post }) => {
             });
 
             deletePost(post.id);
-            navigate(`/${userProfile.username}`)
+            navigate(`/${owner.username}`)
         } catch (error) {
             /* */
             setIsDeleting(false);
@@ -52,9 +62,10 @@ const PostCardContent = ({ post }) => {
                         ) : null}
                     </div>
 
-                    {user.uid && (
+                    {user.uid === owner.uid && (
                         <div className="flex gap-5 mr-2.5">
-                            <button               
+                            <button
+                                onClick={() => navigate(`/post/${post.id}/edit`)}
                             >
                                 <FiEdit size={30} />
                             </button>
@@ -77,11 +88,11 @@ const PostCardContent = ({ post }) => {
             <div>
                 <button
                     className="flex items-center mb-2.5 mt-5 gap-2.5"
-                    onClick={() => navigate(`/${userProfile.username}`)}
+                    onClick={() => navigate(`/${owner.username}`)}
                 >
-                    <img className='w-12 h-12 rounded-full object-cover' src={'/pfp-2.jfif'} alt="profile-pic" />
+                    <img className='w-12 h-12 rounded-full object-cover' src={owner.profilePicURL}  alt="profile-pic" />
                     <div className="">
-                        <span>By {userProfile.name}</span>
+                        <span>By {owner.name}</span>
                     </div>
                 </button>
             </div>

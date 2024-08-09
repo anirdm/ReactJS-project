@@ -11,6 +11,7 @@ import { UserProfileProvider } from "./contexts/UserProfileContext"
 import { PostProvider } from "./contexts/PostContext"
 import Spinner from "./components/spinner/Spinner"
 import PostCard from "./components/postCard/PostCard"
+import PostEdit from "./components/editPost/PostEdit"
 
 function App() {
     const { user, loading } = useUserAuth();
@@ -28,10 +29,11 @@ function App() {
                             <Route path="/" element={loading ? <Spinner /> : <ExplorePage />} />
                             <Route path="/auth/register" element={!user ? <AuthPage /> : <Navigate to='/' />} />
                             <Route path="/auth/login" element={!user ? <AuthPage /> : <Navigate to='/' />} />
-                            <Route path="/post/:_id" element={<DetailsPage />} />
+                            <Route path="/post/:_id" element={ loading ? <Spinner /> : <DetailsPage />} />
+                            <Route path="/post/:_id/edit" element={loading ? <Spinner /> : <PostEdit />} />
                             <Route path="/:username" element={<ProfilePage />} />
-                            <Route path="/:username/edit" element={ user ? <EditProfile /> : <Navigate to='/auth/login' />} />
-                            <Route path="/post/create" element={loading ? <Spinner /> : user ? <CreatePost /> : <Navigate to='/auth/login' />} />
+                            <Route path="/:username/edit" element={ loading ? <Spinner /> : <EditProfile /> } />
+                            <Route path="/post/create" element={ loading ? <Spinner /> : user ? <CreatePost /> : <Navigate to='/auth/login' />} />
                         </Routes>
                     </UserProfileProvider>
                 </PostProvider>           
