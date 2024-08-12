@@ -11,10 +11,9 @@ import { useUserAuth } from '../../contexts/AuthContext'
 
 const ProfilePage = () => {
     const { username } = useParams();
-    const { userProfile } = useGetUserProfileByUsername(username);
-    const { loading } = useUserAuth();
+    const { userProfile, isLoading } = useGetUserProfileByUsername(username);
 
-    if(loading) return <Spinner />;  
+    if(isLoading) return <Spinner />;  
     if (!userProfile) return <UserNotFound />;
 
     return (

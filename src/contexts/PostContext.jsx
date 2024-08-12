@@ -41,8 +41,24 @@ export const PostProvider = ({ children }) => {
         );
     };
 
+    const toggleLike = (postId, userId, isLiked) => {
+        setPosts((prevPosts) =>
+            prevPosts.map((post) => {
+                if (post.id === postId) {
+                    return {
+                        ...post,
+                        likes: isLiked
+                            ? post.likes.filter(id => id !== userId)
+                            : [...post.likes, userId]
+                    };
+                }
+                return post;
+            })
+        );
+    }
+
     return (
-        <PostContext.Provider value={{ posts, createPost, deletePost, editPost, addComment, setPosts }}>
+        <PostContext.Provider value={{ posts, createPost, deletePost, editPost, addComment, toggleLike, setPosts }}>
             {children}
         </PostContext.Provider>
     );

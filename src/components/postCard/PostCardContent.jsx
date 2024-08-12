@@ -9,7 +9,10 @@ import { storage, db } from "../../firebase/firebaseConfig";
 import { arrayRemove, deleteDoc, doc, updateDoc, getDoc } from "firebase/firestore";
 import { usePosts } from "../../contexts/PostContext";
 import { useEffect } from "react";
+import { GoHeart } from "react-icons/go";
+import { GoHeartFill } from "react-icons/go";
 import useGetPostOwner from "../../hooks/useGetPostOwner";
+import useLikePost from "../../hooks/useLikePost";
 
 const PostCardContent = ({ post }) => {
 
@@ -23,6 +26,7 @@ const PostCardContent = ({ post }) => {
     const [isDeleting, setIsDeleting] = useState(false);
 
     const { owner, loading } = useGetPostOwner(post.createdBy);
+    const { handleLikePost, isLiked, likes, error } = useLikePost(post);
 
     if (loading) {
         return;
@@ -56,30 +60,38 @@ const PostCardContent = ({ post }) => {
             <div>
                 <div className="flex justify-between items-center">
                     <div>
-                        <h1>{post.title}</h1>
+                        <h1 className="font-medium">{post.title}</h1>
                         {post.description !== '' ? (
                             <h3>{post.description}</h3>
                         ) : null}
                     </div>
 
                     {user && (
-                        user.uid === owner.uid && (
+                        user.uid === owner.uid ? (
                             <div className="flex gap-5 mr-2.5">
                                 <button
                                     onClick={() => navigate(`/post/${post.id}/edit`)}
                                 >
-                                    <FiEdit size={30} />
+                                    <FiEdit size={25} />
                                 </button>
                                 <button
                                     onClick={handleDeletePost}
                                 >
-                                    <FaTrashCan size={30} />
+                                    <FaTrashCan size={25} />
                                 </button>
                             </div>
-                        )
+                        ) : (
+                            <button
+                                onClick={handleLikePost}
+                                className=" mr-5"
+                            >
+                                {!isLiked ? <GoHeart className="w-8 h-10" /> : <GoHeartFill className="w-8 h-10 text-red-500" />}
+                            </button>         
+                        )              
                     )}
-                    
+
                 </div>
+                
 
                 {/*<div className='tags-container my-5 text-flagstone'>
                     {/*{tags.map((tag, index) => (

@@ -1,13 +1,15 @@
 import { FaRegComment, FaRegHeart } from "react-icons/fa";
 import Comment from "./comments/Comment";
+import useLikePost from "../../hooks/useLikePost";
 
 const PostInteractions = ({ post }) => {
+
     return (
         <section className="post-interactions flex flex-col">
             <div className='likes-comments-container flex flex-row gap-3 my-5'>
                 <div className='likes flex flex-row gap-1'>
                     <FaRegHeart className="text-2xl" />
-                    <span className="text-flagstone">likes</span>
+                    <span className="text-flagstone">{post.likes.length} likes</span>
                 </div>
                 <div className='comments flex flex-row gap-1'>
                     <FaRegComment className="text-2xl " />

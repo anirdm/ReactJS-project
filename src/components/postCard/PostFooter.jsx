@@ -45,7 +45,7 @@ const PostFooter = () => {
                     {isCommenting ? (
                         <div className="spinner-border animate-spin inline-block w-4 h-4 border-2 rounded-full"></div>
                     ) : (
-                        <IoSend className='text-xl'/>
+                        <IoSend size={20}/>
                     )}
                 </button>
             </form> 
