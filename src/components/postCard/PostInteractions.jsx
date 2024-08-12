@@ -3,6 +3,8 @@ import Comment from "./comments/Comment";
 import useLikePost from "../../hooks/useLikePost";
 
 const PostInteractions = ({ post }) => {
+    // Sort comments from newest to oldest
+    const sortedComments = [...post.comments].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
     return (
         <section className="post-interactions flex flex-col">
@@ -19,8 +21,8 @@ const PostInteractions = ({ post }) => {
             <div>
                 <h3>Comments</h3>
                 <div className='comments-container overflow-auto max-h-40 mt-15'>
-                    {post.comments.length !== 0 ? (
-                        post.comments.map((comment) => (
+                    {sortedComments.length !== 0 ? (
+                        sortedComments.map((comment) => (
                             <Comment key={comment.id} comment={comment} />
                         ))
                     ) : (

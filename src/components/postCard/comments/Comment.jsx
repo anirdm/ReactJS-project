@@ -1,5 +1,6 @@
 import useGetPostOwner from "../../../hooks/useGetPostOwner";
 import { Link } from "react-router-dom";
+import { timeFormatter } from "../../../utils/timeFormatter";
 
 const Comment = ({ comment }) => {
     const ownerId = comment.createdBy;
@@ -21,7 +22,7 @@ const Comment = ({ comment }) => {
                     <p className="font-medium ">{owner.name}</p>
                 </Link>
                 <p>{comment.comment}</p>
-                <span className="text-sm text-flagstone">17/10/2010</span>
+                <span className="text-sm text-flagstone">{timeFormatter(comment.createdAt)}</span>
             </div>
         </div>
 
