@@ -5,45 +5,52 @@ import { FiEdit } from "react-icons/fi";
 import usePreviewImg from '../../hooks/usePreviewImg';
 import { useUserAuth } from '../../contexts/AuthContext';
 import { usePosts } from '../../contexts/PostContext';
-import { useLocation } from 'react-router-dom';
 import { addDoc, collection, updateDoc, arrayUnion, doc } from 'firebase/firestore';
 import { db, storage } from '../../firebase/firebaseConfig';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
+import { createPostSchema } from '../../schemas/createPostSchema';
+import { useFormik } from 'formik';
+import ButtonSpinner from '../buttonSpinner/ButtonSpinner';
 
 const CreatePost = () => {
-    const [inputs, setInputs] = useState({
-        title: '',
-        description: '',
-    });
-
-    const [err, setErr] = useState('');
-
-	const imageRef = useRef(null);
-	const { handleImageChange, selectedFile, setSelectedFile, error } = usePreviewImg();
-	const { isLoading, handleCreatePost } = useCreatePost();
-
+    const { handleImageChange, selectedFile, error } = usePreviewImg();
+    const imageRef = useRef(null);
+    const { isLoading, handleCreatePost } = useCreatePost();
     const navigate = useNavigate();
 
+    const onSubmit = async (values) => {
+        try {
+            await handleCreatePost(values, navigate);
+        } catch (err) {
+            /** */
+        }
+    }
+
+    const { values, handleChange, handleBlur, handleSubmit, errors, touched, setFieldValue } = useFormik({
+        initialValues: {
+            title: '',
+            description: '',
+            selectedFile: null
+        },
+        validationSchema: createPostSchema,
+        onSubmit
+    });
 
     //  function that triggers the click event on the hidden file input element
     const handleChooseImageClick = () => {
         imageRef.current.click();
     };
 
-    const handlePostCreation = async (e) => {
-        e.preventDefault();
+    const handlePostImageChange = (e) => {
+        const file = e.currentTarget.files[0];
 
-        try {
-            await handleCreatePost(selectedFile, inputs);
-            setInputs({ title: '', description: '' });
-            setSelectedFile(null); // Reset selected file
-
-            // navigate(`/post/${postDocRef.id}`); // Navigate to the new post details page
-        } catch (err) {
-            setErr(err);
-            /* */
+        if (file) {
+            const fileURL = URL.createObjectURL(file);
+            setFieldValue('selectedFile', fileURL);
         }
+
+        handleImageChange(e);
     }
 
     return (
@@ -51,7 +58,7 @@ const CreatePost = () => {
             <form
                 action='post'
                 className='flex flex-col border border-blue-mana rounded-lg w-fit p-6 shadow-lg'
-                onSubmit={handlePostCreation}
+                onSubmit={handleSubmit}
             >
                 <h2 className='font-medium mb-6'>Create Post</h2>
 
@@ -81,7 +88,7 @@ const CreatePost = () => {
                                     >
                                         Choose an image
                                     </button>
-                                    <span className='font-small text-flagstone text-center mt-5'>We recommend using .jpg or .png files less than 20MB</span>
+                                    <span className='font-small text-flagstone text-center mt-5'>We recommend using .jpg or .png files less than 10MB</span>
                                 </div>
                             )}
                         {/**/}
@@ -95,9 +102,11 @@ const CreatePost = () => {
                                     type="text"
                                     placeholder="Add a title"
                                     name="title"
-                                    value={inputs.title}
-                                    onChange={(e) => setInputs({ ...inputs, title: e.target.value })}
+                                    value={values.title}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
                                 />
+                                {errors.title && touched.title ? (<p className="text-red-500 text-sm mt-1 w-96 break-word">{errors.title}</p>) : null}
                             </div>
 
                             <div className='flex flex-col gap-3'>
@@ -106,9 +115,11 @@ const CreatePost = () => {
                                     placeholder="Add a description"
                                     name="description"
                                     className='bg-bright-white rounded-xl h-20 resize-none p-2'
-                                    value={inputs.description}
-                                    onChange={(e) => setInputs({ ...inputs, description: e.target.value })}
+                                    value={values.description}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
                                 />
+                                {errors.description && touched.description ? (<p className="text-red-500 text-sm mt-1 w-96 break-word">{errors.description}</p>) : null}
                             </div>
 
                             {/* Hidden file input */}
@@ -118,16 +129,21 @@ const CreatePost = () => {
                                 id=""
                                 hidden
                                 ref={imageRef}
-                                onChange={handleImageChange}
+                                onChange={handlePostImageChange}
+                                onBlur={handleBlur}
                             />
 
+                            {errors.selectedFile && touched.selectedFile ? (<p className="text-red-500 text-sm mt-1 w-96 break-word">{errors.selectedFile}</p>) : null}
                             {error && <p className='text-red-500'>{error}</p>}
-                            {err && <p className='text-red-500'>{err.message}</p>}
 
                             <button
                                 type='submit'
-                                className='primary-button self-end mt-24'>
-                                Post
+                                className="primary-button self-end mt-24"
+                            >
+                                {isLoading && (
+                                    <ButtonSpinner />
+                                )}
+                                {isLoading ? '' : 'Post'}
                             </button>
                         </div>
                     </div>
@@ -140,26 +156,19 @@ const CreatePost = () => {
 export default CreatePost;
 
 const useCreatePost = () => {
-    const imageRef = useRef(null);
-    const { handleImageChange, selectedFile, setSelectedFile, error } = usePreviewImg();
     const { user } = useUserAuth();
     const { createPost } = usePosts();
-    const { pathname } = useLocation();
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleCreatePost = async (selectedFile, inputs) => {
+    const handleCreatePost = async (values, navigate) => {
         if (isLoading) return;
-
-        if (!selectedFile) {
-            throw new Error('Please select a file');
-        }
 
         setIsLoading(true);
 
         const newPost = {
-            title: inputs.title.trim(),
-            description: inputs.description.trim(),
+            title: values.title.trim(),
+            description: values.description.trim(),
             likes: [],
             comments: [],
             createdBy: user.uid,
@@ -173,7 +182,7 @@ const useCreatePost = () => {
 
             await updateDoc(userDocRef, { posts: arrayUnion(postDocRef.id) });
 
-            const fileBlob = await fetch(selectedFile).then(res => res.blob());
+            const fileBlob = await fetch(values.selectedFile).then(res => res.blob());
             await uploadBytes(imageRef, fileBlob);
             const downloadURL = await getDownloadURL(imageRef);
             await updateDoc(postDocRef, { imageURL: downloadURL });
@@ -182,12 +191,10 @@ const useCreatePost = () => {
 
             createPost({ ...newPost, id: postDocRef.id });
 
-            console.log(newPost);
-
             /*navigate to the new post details page */
+            navigate(`/post/${postDocRef.id}`);
         } catch (err) {
-            /* */
-            /*setErr(err);*/
+
         } finally {
             setIsLoading(false);
         }

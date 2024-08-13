@@ -20,7 +20,11 @@ const useLikePost = (post) => {
             await updateDoc(postRef, {
                 likes: isLiked ? arrayRemove(user.uid) : arrayUnion(user.uid)
             })
-    
+
+            await updateDoc(doc(db, 'users', user.uid), {
+                likedPosts: isLiked ? arrayRemove(post.id) : arrayUnion(post.id)
+            });
+
             setIsLiked(!isLiked);
             setLikes((prevLikes) => (isLiked ? prevLikes - 1 : prevLikes + 1));
 

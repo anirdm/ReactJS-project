@@ -2,33 +2,43 @@ import styles from './AuthForm.module.css'
 import { useState } from 'react';
 import { useUserAuth } from '../../contexts/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
+import { useFormik } from 'formik';
+import { registerSchema } from '../../schemas/registerShema';
+import ButtonSpinner from '../buttonSpinner/ButtonSpinner';
 
 const RegisterForm = () => {
-    const [ inputs, setInputs ] = useState({
-        email: '',
-        username: '',
-        name: '',
-        password: '',
-        rePassword: ''
-    });
-    const { signUp } = useUserAuth();
     const [err, setErr] = useState('');
+    const { signUp, loading } = useUserAuth();
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const onSubmit = async (values) => {
         try {
-            await signUp(inputs);
+            await signUp(values);
             navigate('/');
-        } catch (error) {
-            setErr(error.message);
+        } catch (err) {
+            setErr(err.message);
+            /** */
         }
     }
 
+    // just destructure and get all the methods we need
+    const { values, handleChange, handleBlur, handleSubmit, errors, touched } = useFormik({
+        initialValues: {
+            email: '',
+            username: '',
+            name: '',
+            password: '',
+            rePassword: '',
+        },
+        validationSchema: registerSchema,
+        onSubmit
+    });
+
     return (
-        <div>
-            <form 
+        <div className='max-h-screen'>
+            <form
                 className="flex flex-col border border-blue-mana rounded-lg w-fit p-6 shadow-lg justify-center"
+                autoComplete="off"
                 onSubmit={handleSubmit}
             >
                 <div>
@@ -36,56 +46,79 @@ const RegisterForm = () => {
                     <h2>Let's sign you up</h2>
                 </div>
                 <div className="flex flex-col gap-6 mt-5">
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        name="email"
-                        value={inputs.email}
-                        onChange={(e) => (setInputs({...inputs, email: e.target.value}))}
-                        required
-                    />
-                    <input
-                        type="text"
-                        placeholder="Username"
-                        name="username"
-                        value={inputs.username}
-                        onChange={(e) => setInputs({...inputs, username: e.target.value})}
+                    <div>
+                        <input
+                            type="text"
+                            placeholder="Email"
+                            name="email" // or id
+                            value={values.email}
+                            onChange={handleChange}
+                            onBlur={handleBlur} // validates the form when you click off the input
+                        />
+                        {/*touched - for when the user clicked out of the input*/}
+                        {errors.email && touched.email ? (<p className="text-red-500 text-sm mt-1 w-96 break-word">{errors.email}</p>) : null}
+                    </div>
 
-                        required
-                    />
-                    <input
-                        type="text"
-                        placeholder="Name"
-                        name="name"
-                        value={inputs.name}
-                        onChange={(e) => setInputs({...inputs, name: e.target.value})}
-                        required
-                    />
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        name="password"
-                        value={inputs.password}
-                        onChange={(e) => setInputs({...inputs, password: e.target.value})}
-                        required
-                    />
-                    <input
-                        type="password"
-                        placeholder="Confirm password"
-                        name="rePassword"
-                        value={inputs.rePassword}
-                        onChange={(e) => setInputs({...inputs, rePassword: e.target.value})}
-                        required
-                    />
+                    <div>
+                        <input
+                            type="text"
+                            placeholder="Username"
+                            name="username"
+                            value={values.username}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        {errors.username && touched.username ? (<p className="text-red-500 text-sm mt-1 w-96 break-word">{errors.username}</p>) : null}
+                    </div>
 
-                    { err && (
-                       <p className="text-red-500 text-sm mt-1 w-96 break-word">{err}</p>
+                    <div>
+                        <input
+                            type="text"
+                            placeholder="Name"
+                            name="name"
+                            value={values.name}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        {errors.name && touched.name ? (<p className="text-red-500 text-sm mt-1 w-96 break-word">{errors.name}</p>) : null}
+                    </div>
+
+                    <div>
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            name="password"
+                            value={values.password}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        {errors.password && touched.password ? (<p className="text-red-500 text-sm mt-1 w-96 break-word">{errors.password}</p>) : null}
+                    </div>
+
+                    <div>
+                        <input
+                            type="password"
+                            placeholder="Confirm password"
+                            name="rePassword"
+                            value={values.rePassword}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        {errors.rePassword && touched.rePassword ? (<p className="text-red-500 text-sm mt-1 w-96 break-word">{errors.rePassword}</p>) : null}
+                    </div>
+
+                    {err && (
+                        <p className="text-red-500 text-sm mt-1 w-96 break-word">{err}</p>
                     )}
 
-                    <button 
+                    <button
                         type='submit'
                         className="primary-button self-center"
-                    >Sign up
+                    >
+                        {loading && (
+                            <ButtonSpinner />
+                        )}
+                        {loading ? '' : 'Sign up'}
                     </button>
                 </div>
             </form>

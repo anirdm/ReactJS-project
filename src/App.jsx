@@ -10,7 +10,6 @@ import { useUserAuth } from "./contexts/AuthContext"
 import { UserProfileProvider } from "./contexts/UserProfileContext"
 import { PostProvider } from "./contexts/PostContext"
 import Spinner from "./components/spinner/Spinner"
-import PostCard from "./components/postCard/PostCard"
 import PostEdit from "./components/editPost/PostEdit"
 
 function App() {

@@ -24,13 +24,6 @@ const UserNavBarLinks = () => {
                 Create
             </NavLink>
             <NavLink
-                to=''
-                className='flex flex-row items-center gap-3 hover:text-flagstone transition-colors text-xl'
-            >
-                <IoNotificationsOutline size={25} />
-                Notifications
-            </NavLink>
-            <NavLink
                 to={`/${user.username}`}
                 className='flex flex-row items-center gap-3 hover:text-flagstone transition-colors text-xl'
             >

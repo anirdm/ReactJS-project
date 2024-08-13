@@ -5,9 +5,11 @@ import { usePosts } from '../contexts/PostContext';
 
 const useEditPost = () => {
     const [error, setError] = useState('');
+    const [isUpdating, setIsUpdating] = useState(false);
     const { posts, setPosts } = usePosts();
 
     const editPost = async (postId, updatedData) => {
+        setIsUpdating(true);
         const postDocRef = doc(db, 'posts', postId);
 
         try {
@@ -21,10 +23,12 @@ const useEditPost = () => {
         } catch (error) {
             setError(error.message);
             return;
+        } finally {
+            setIsUpdating(false);
         }
     };
 
-    return { editPost, error };
+    return { editPost, error, isUpdating };
 };
 
 export default useEditPost;

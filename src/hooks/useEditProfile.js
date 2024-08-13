@@ -7,33 +7,32 @@ import { useUserProfile } from '../contexts/UserProfileContext';
 
 const useEditProfile = () => {
     const [ error, setError ] = useState('');
-
+    const [ isUpdating , setIsUpdating ] = useState(false);
     const { user, setUser } = useUserAuth();
     const { setUserProfile } = useUserProfile();
 
-    const editProfile = async (inputs, selectedFile) => {
+    const editProfile = async (inputs) => {
         if (!user) return;
-        /*setIsUpdating(true);*/
+
+        setIsUpdating(true);
 
         const storageRef = ref(storage, `profilePics/${user.uid}`);
         const userDocRef = doc(db, "users", user.uid);
 
         let URL = '';
         try {
-            if (selectedFile) {
+            if (inputs.selectedFile && !inputs.selectedFile.startsWith('http')) {
                 // Use uploadBytes to upload the file
-                const fileBlob = await fetch(selectedFile).then(res => res.blob());
+                const fileBlob = await fetch(inputs.selectedFile).then(res => res.blob());
                 await uploadBytes(storageRef, fileBlob);
-                /*await uploadString(storageRef, selectedFile, "data_url");*/
                 // gets the URL of the image
                 URL = await getDownloadURL(ref(storage, `profilePics/${user.uid}`));
             }
 
             const updatedUser = {
                 ...user, // to not override the other data (following, followers etc.)
-                bio: inputs.bio || user.bio,
-                name: inputs.name || user.name,
-                /*username: inputs.username || user.username,*/
+                bio: inputs.bio,
+                name: inputs.name,
                 profilePicURL: URL || user.profilePicURL
             }
 
@@ -44,10 +43,12 @@ const useEditProfile = () => {
         } catch (error) {
             setError(error);
             return;
+        } finally {
+            setIsUpdating(false);
         }
     } 
 
-    return { editProfile };
+    return { editProfile, isUpdating };
 }
 
 export default useEditProfile;

@@ -40,17 +40,11 @@ export const AuthProvider = ({ children }) => {
         return () => unsubscribe();
     }, []);
 
-
     const signUp = async (inputs) => {
         setLoading(true);
         const trimmedInputs = Object.fromEntries(
             Object.entries(inputs).map(([key, value]) => [key, value.trim()])
         );
-
-        if (trimmedInputs.password !== trimmedInputs.rePassword) {
-            setLoading(false);
-            throw new Error('Passwords do not match');
-        }
 
         // prevent sign up with already existing username
         // reference to the user collection
@@ -86,8 +80,6 @@ export const AuthProvider = ({ children }) => {
             setLoading(false);
             if (err.code === 'auth/email-already-in-use') {
                 throw new Error('This email address is already associated with an account. Please try logging in or use a different email address.');
-            } else if (err.code === 'auth/weak-password') {
-                throw new Error('Password should be at least 6 characters.');
             } else {
                 throw new Error(err.message);
             }
@@ -109,6 +101,9 @@ export const AuthProvider = ({ children }) => {
             }
         } catch (err) {
             setLoading(false);
+            if (err.code === 'auth/invalid-credential') {
+                throw new Error('Oops! Your login credentials are invalid. Please check your email and password.');
+            }
             throw new Error(err.message);
         }
 
