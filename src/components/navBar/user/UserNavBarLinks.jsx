@@ -10,13 +10,6 @@ const UserNavBarLinks = () => {
     return (
         <>
             <NavLink
-                to='/home'
-                className='flex flex-row items-center gap-3 hover:text-flagstone transition-colors text-xl'
-            >
-                < AiFillHome size={25} />
-                Home
-            </NavLink>
-            <NavLink
                 to='/post/create'
                 className='flex flex-row items-center gap-3 hover:text-flagstone transition-colors text-xl'
             >

@@ -1,14 +1,23 @@
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
 import FeedItem from '../../components/feedItem/FeedItem'
 import useGetUserPosts from "../../hooks/useGetUserPosts"
+import useGetUserLikedPosts from "../../hooks/useGetUserLikedPosts";
+import { useState } from "react";
+import ProfileTabs from "./ProfileTabs";
 
 const UserPosts = () => {
-    const { isLoading, posts } = useGetUserPosts();
+    const [selectedButton, setSelectedButton] = useState('posts');
+    const { isLoading: loadingUserPosts, posts: userPosts } = useGetUserPosts();
+    const { isLoading: loadingLikedPosts, likedPosts } = useGetUserLikedPosts();
+   // const { isLoading: loadingLikedPosts, posts: likedPosts } = useGetUserLikedPosts();
 
+    const posts = selectedButton === 'posts' ? userPosts : likedPosts;
+    const isLoading = selectedButton === 'posts' ? loadingUserPosts : loadingLikedPosts;
     const noPostsFound = posts.length === 0;
 
     return (
         <section className='posts'>
+            <ProfileTabs selectedButton={selectedButton} onSelectButton={setSelectedButton}/>
             {isLoading ? null :
                 noPostsFound ? (
                     <div className="flex justify-center">

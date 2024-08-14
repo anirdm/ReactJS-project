@@ -58,9 +58,9 @@ const PostCardContent = ({ post }) => {
     return (
         <section>
             <div>
-                <div className="flex justify-between items-center">
-                    <div>
-                        <h1 className="font-medium">{post.title}</h1>
+                <div className="flex justify-between items-center break-words">
+                    <div className="max-w-96">
+                        <h1 className="font-medium ">{post.title}</h1>
                         {post.description !== '' ? (
                             <h3>{post.description}</h3>
                         ) : null}

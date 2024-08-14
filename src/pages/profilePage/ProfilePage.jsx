@@ -19,7 +19,6 @@ const ProfilePage = () => {
     return (
         <>
             <ProfileHeader />
-            <ProfileTabs />
             <UserPosts />
         </>
     )
