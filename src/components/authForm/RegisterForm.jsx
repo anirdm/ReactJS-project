@@ -21,7 +21,6 @@ const RegisterForm = () => {
         }
     }
 
-    // just destructure and get all the methods we need
     const { values, handleChange, handleBlur, handleSubmit, errors, touched } = useFormik({
         initialValues: {
             email: '',
@@ -37,7 +36,7 @@ const RegisterForm = () => {
     return (
         <div className='max-h-screen'>
             <form
-                className="flex flex-col border border-blue-mana rounded-lg w-fit p-6 shadow-lg justify-center"
+                className={styles.formContainer}
                 autoComplete="off"
                 onSubmit={handleSubmit}
             >
@@ -45,18 +44,18 @@ const RegisterForm = () => {
                     <h1>Register</h1>
                     <h2>Let's sign you up</h2>
                 </div>
-                <div className="flex flex-col gap-6 mt-5">
+                <div className={styles.inputContainer}>
                     <div>
                         <input
                             type="text"
                             placeholder="Email"
-                            name="email" // or id
+                            name="email" 
                             value={values.email}
                             onChange={handleChange}
-                            onBlur={handleBlur} // validates the form when you click off the input
+                            onBlur={handleBlur} 
                         />
-                        {/*touched - for when the user clicked out of the input*/}
-                        {errors.email && touched.email ? (<p className="text-red-500 text-sm mt-1 w-96 break-word">{errors.email}</p>) : null}
+
+                        {errors.email && touched.email ? (<p className={styles.errorText}>{errors.email}</p>) : null}
                     </div>
 
                     <div>
@@ -68,7 +67,7 @@ const RegisterForm = () => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                         />
-                        {errors.username && touched.username ? (<p className="text-red-500 text-sm mt-1 w-96 break-word">{errors.username}</p>) : null}
+                        {errors.username && touched.username ? (<p className={styles.errorText}>{errors.username}</p>) : null}
                     </div>
 
                     <div>
@@ -80,7 +79,7 @@ const RegisterForm = () => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                         />
-                        {errors.name && touched.name ? (<p className="text-red-500 text-sm mt-1 w-96 break-word">{errors.name}</p>) : null}
+                        {errors.name && touched.name ? (<p className={styles.errorText}>{errors.name}</p>) : null}
                     </div>
 
                     <div>
@@ -92,7 +91,7 @@ const RegisterForm = () => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                         />
-                        {errors.password && touched.password ? (<p className="text-red-500 text-sm mt-1 w-96 break-word">{errors.password}</p>) : null}
+                        {errors.password && touched.password ? (<p className={styles.errorText}>{errors.password}</p>) : null}
                     </div>
 
                     <div>
@@ -104,11 +103,11 @@ const RegisterForm = () => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                         />
-                        {errors.rePassword && touched.rePassword ? (<p className="text-red-500 text-sm mt-1 w-96 break-word">{errors.rePassword}</p>) : null}
+                        {errors.rePassword && touched.rePassword ? (<p className={styles.errorText}>{errors.rePassword}</p>) : null}
                     </div>
 
                     {err && (
-                        <p className="text-red-500 text-sm mt-1 w-96 break-word">{err}</p>
+                        <p className={styles.errorText}>{err}</p>
                     )}
 
                     <button
@@ -126,7 +125,7 @@ const RegisterForm = () => {
             <div className={styles.authBlock}>
                 <p>
                     Already have an account?
-                    <Link to="/auth/login" className='text-blue-mana font-bold ml-2'>Login</Link>
+                    <Link to="/auth/login" className={styles.authLink}>Login</Link>
                 </p>
             </div>
         </div>

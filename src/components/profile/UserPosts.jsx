@@ -9,7 +9,6 @@ const UserPosts = () => {
     const [selectedButton, setSelectedButton] = useState('posts');
     const { isLoading: loadingUserPosts, posts: userPosts } = useGetUserPosts();
     const { isLoading: loadingLikedPosts, likedPosts } = useGetUserLikedPosts();
-   // const { isLoading: loadingLikedPosts, posts: likedPosts } = useGetUserLikedPosts();
 
     const posts = selectedButton === 'posts' ? userPosts : likedPosts;
     const isLoading = selectedButton === 'posts' ? loadingUserPosts : loadingLikedPosts;

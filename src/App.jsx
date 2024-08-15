@@ -15,10 +15,6 @@ import PostEdit from "./components/editPost/PostEdit"
 function App() {
     const { user, loading } = useUserAuth();
 
-    /*if (loading) {
-        return (<Spinner />);
-    }*/
-
     return (
         <BrowserRouter>
             <PageLayout>    

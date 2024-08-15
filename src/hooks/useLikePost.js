@@ -28,7 +28,6 @@ const useLikePost = (post) => {
             setIsLiked(!isLiked);
             setLikes((prevLikes) => (isLiked ? prevLikes - 1 : prevLikes + 1));
 
-            // UI
             toggleLike(post.id, user.uid, isLiked);
         } catch (error) {
             setError(error);

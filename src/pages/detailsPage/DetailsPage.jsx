@@ -9,10 +9,9 @@ import useGetPostOwner from "../../hooks/useGetPostOwner";
 import { Link } from "react-router-dom";
 
 const DetailsPage = () => {
-  const { _id } = useParams(); // Extract post ID from URL
+  const { _id } = useParams(); 
   const { isLoading, getPostById } = useGetAllPosts();
 
-  // Retrieve the post by ID
   const post = getPostById(_id);
 
   if (isLoading) {

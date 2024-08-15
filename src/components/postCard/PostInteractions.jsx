@@ -3,7 +3,6 @@ import Comment from "./comments/Comment";
 import useLikePost from "../../hooks/useLikePost";
 
 const PostInteractions = ({ post }) => {
-    // Sort comments from newest to oldest
     const sortedComments = [...post.comments].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
     return (

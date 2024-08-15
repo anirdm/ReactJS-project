@@ -21,16 +21,14 @@ const useGetUserPosts = () => {
                 const querySnapshot = await getDocs(q);
 
                 const posts = [];
-                // id for the key={post.id}
+
                 querySnapshot.forEach(post => {
                     posts.push({...post.data(), id: post.id})
                 })
 
-                // the latest post to the top
                 posts.sort((a, b) => b.createdAt - a.createdAt);
                 setPosts(posts);
             } catch (error) {
-                /* */
                 setPosts([]);
             } finally { 
                 setIsLoading(false);
@@ -46,8 +44,6 @@ const useGetUserPosts = () => {
         }
         
         return posts.find(post => post.id === id);
-        /*const res = posts.find(post => post.id === id);
-        console.log(res);*/
     };
 
     return { isLoading, posts, getPostById };

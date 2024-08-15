@@ -3,21 +3,17 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, on
 import { setDoc, getDoc, getDocs, doc, collection, query, where } from 'firebase/firestore';
 import { auth, db } from '../firebase/firebaseConfig';
 
-// Create the AuthContext
 const AuthContext = createContext();
 
-// Custom hook to use the AuthContext
 export const useUserAuth = () => {
     return useContext(AuthContext);
 }
 
-// AuthProvider component to wrap the application and provide context values
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
-    // Set up authentication state listener
     useEffect(() => {
         setLoading(true);
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -46,8 +42,6 @@ export const AuthProvider = ({ children }) => {
             Object.entries(inputs).map(([key, value]) => [key, value.trim()])
         );
 
-        // prevent sign up with already existing username
-        // reference to the user collection
         const usersRef = collection(db, "users");
         const q = query(usersRef, where("username", "==", trimmedInputs.username));
         const querySnapshot = await getDocs(q);
@@ -112,7 +106,7 @@ export const AuthProvider = ({ children }) => {
 
     const logOut = async () => {
         setLoading(true);
-        // if user
+        
         try {
             await signOut(auth);
             localStorage.removeItem('user-info');

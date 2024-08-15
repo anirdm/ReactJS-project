@@ -1,6 +1,5 @@
 import * as yup from 'yup';
 
-// schema is object that we defined with this shape
 export const registerSchema = yup.object().shape({
     email: yup.string()
         .email('Please enter a valid email')
@@ -19,6 +18,6 @@ export const registerSchema = yup.object().shape({
         .min(6, 'Password must be at least 6 characters long.')
         .required('Password is required.'),
     rePassword:  yup.string()
-        .oneOf([yup.ref('password'), null], 'Passwords do not match') // null if undefined etc.
+        .oneOf([yup.ref('password'), null], 'Passwords do not match') 
         .required('Password confirmation is required.'),
 })

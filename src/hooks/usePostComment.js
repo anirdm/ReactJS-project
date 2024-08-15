@@ -13,7 +13,7 @@ const usePostComment = () => {
 
     const handlePostComment = async (postId, comment) => {
         if(isCommenting) return;
-        //if(!user) 
+
         setIsCommenting(true);
 
         const newComment = {
@@ -24,12 +24,11 @@ const usePostComment = () => {
         }
 
         try {
-            // updating the db
             await updateDoc(doc(db, 'posts', postId), {
                 comments: arrayUnion(newComment)
             });
 
-            //updating the UI
+
             addComment(postId, newComment);
         } catch (error) {
             setError(error);

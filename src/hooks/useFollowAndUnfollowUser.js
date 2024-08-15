@@ -26,7 +26,6 @@ const useFollowAndUnfollowUser = (userId) => {
             });
 
             if(isFollowing) {
-                // unfollow
                 setUser({
                     ...user,
                     following: user.following.filter(uid => uid !== userId)
@@ -43,7 +42,6 @@ const useFollowAndUnfollowUser = (userId) => {
                 }))
                 setIsFollowing(false);
             } else { 
-                // follow 
 				setUser({
 					...user,
 					following: [...user.following, userId],

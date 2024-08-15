@@ -3,7 +3,7 @@ import { useState } from 'react'
 const usePreviewImg = () => {
     const [error, setError] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
-    const maxFileSize = 10 * 1024 * 1024; //20MB
+    const maxFileSize = 10 * 1024 * 1024; 
     const allowedFileTypes = ['image/jpeg', 'image/png', 'image/jfif'];
 
     const handleImageChange = (e) => {

@@ -7,14 +7,11 @@ const PageLayout = ({ children }) => {
 
     return (
         
-        <div className="flex ">
+        <div className="flex">
             { pathname !== '/auth/register' && pathname !== '/auth/login' ? (
                 <NavBar />      
             ) : null }
             <div className="flex-1 px-10 pt-10">
-                {/*{ pathname !== '/auth/register' && pathname !== '/auth/login' ? (
-                    <SearchBar />      
-                ) : null }*/}
                 {children}
             </div>
         </div>

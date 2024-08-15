@@ -33,14 +33,14 @@ const LoginForm = () => {
     return (
         <div>
             <form
-                className="flex flex-col border border-blue-mana rounded-lg w-fit p-6 shadow-lg justify-center"
+                className={styles.formContainer}
                 onSubmit={handleSubmit}
             >
                 <div>
                     <h1>Login</h1>
                     <h2>Let's sign you in</h2>
                 </div>
-                <div className="flex flex-col gap-6 mt-5">
+                <div className={styles.inputContainer}>
                     <div>
                         <input
                             type="text"
@@ -50,7 +50,7 @@ const LoginForm = () => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                         />
-                        {errors.email && touched.email ? (<p className="text-red-500 text-sm mt-1 w-96 break-word">{errors.email}</p>) : null}
+                        {errors.email && touched.email ? (<p className={styles.errorText}>{errors.email}</p>) : null}
                     </div>
 
                     <div>
@@ -62,11 +62,11 @@ const LoginForm = () => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                         />
-                        {errors.password && touched.password ? (<p className="text-red-500 text-sm mt-1 w-96 break-word">{errors.password}</p>) : null}
+                        {errors.password && touched.password ? (<p className={styles.errorText}>{errors.password}</p>) : null}
                     </div>
 
                     {err && (
-                        <p className="text-red-500 text-sm mt-1 w-96 break-word">{err}</p>
+                        <p className={styles.errorText}>{err}</p>
                     )}
 
                     <button
@@ -84,7 +84,7 @@ const LoginForm = () => {
             <div className={styles.authBlock}>
                 <p>
                     Don't have an account?
-                    <Link to='/auth/register' className='text-blue-mana font-bold ml-2'>Register</Link>
+                    <Link to='/auth/register' className={styles.authLink}>Register</Link>
                 </p>
             </div>
         </div>

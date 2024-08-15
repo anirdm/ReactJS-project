@@ -21,7 +21,6 @@ const useGetAllPosts = () => {
                     posts.push({ ...post.data(), id: post.id });
                 });
 
-                // Sort posts to have the latest post at the top
                 posts.sort((a, b) => b.createdAt - a.createdAt);
                 setPosts(posts);
             } catch (error) {

@@ -24,7 +24,6 @@ const useGetUserProfileByUsername = (username) => {
                 userDoc = doc.data();
             })
             setUserProfile(userDoc);
-            /*setUserProfile(userDoc) */
           } catch (err) {
             console.log(err);
           } finally {

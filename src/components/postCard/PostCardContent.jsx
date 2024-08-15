@@ -15,10 +15,6 @@ import useGetPostOwner from "../../hooks/useGetPostOwner";
 import useLikePost from "../../hooks/useLikePost";
 
 const PostCardContent = ({ post }) => {
-
-    // Call custom hook at the top level
-    /*const { owner } = useGetPostOwner(post.createdBy); */
-
     const { user } = useUserAuth();
     const { deletePost } = usePosts();
     const navigate = useNavigate();
@@ -34,7 +30,6 @@ const PostCardContent = ({ post }) => {
 
     const handleDeletePost = async () => {
         if (!window.confirm('Are you sure you want to delete this post?')) return;
-        // if while deleting the user clicks again
         if (isDeleting) return;
 
         try {
@@ -91,13 +86,6 @@ const PostCardContent = ({ post }) => {
                     )}
 
                 </div>
-                
-
-                {/*<div className='tags-container my-5 text-flagstone'>
-                    {/*{tags.map((tag, index) => (
-                        <span key={index} className="tag">#{tag}</span>
-                    ))}
-                </div>*/}
             </div>
 
             <div>

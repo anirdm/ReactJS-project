@@ -8,10 +8,6 @@ const FeedItem = ({ post, _id }) => {
             <Link to={`/post/${_id}`} className={styles.card}>
                 <img src={post.imageURL} alt="" />         
             </Link>
-
-            {/*<Link to={`/post/${_id}`} className={styles.card}>
-                {/*<PostCard post={post} _id={_id} hidden/>
-            </Link>*/}
         </div>
     )
 }

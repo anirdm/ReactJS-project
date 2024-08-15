@@ -37,7 +37,6 @@ const CreatePost = () => {
         onSubmit
     });
 
-    //  function that triggers the click event on the hidden file input element
     const handleChooseImageClick = () => {
         imageRef.current.click();
     };
@@ -91,7 +90,7 @@ const CreatePost = () => {
                                     <span className='font-small text-flagstone text-center mt-5'>We recommend using .jpg or .png files less than 10MB</span>
                                 </div>
                             )}
-                        {/**/}
+
                     </div>
 
                     <div>
@@ -123,7 +122,6 @@ const CreatePost = () => {
                                 {errors.description && touched.description ? (<p className="text-red-500 text-sm mt-1 w-96 break-word">{errors.description}</p>) : null}
                             </div>
 
-                            {/* Hidden file input */}
                             <input
                                 type="file"
                                 name=""
@@ -192,7 +190,6 @@ const useCreatePost = () => {
 
             createPost({ ...newPost, id: postDocRef.id });
 
-            /*navigate to the new post details page */
             navigate(`/post/${postDocRef.id}`);
         } catch (err) {
 
