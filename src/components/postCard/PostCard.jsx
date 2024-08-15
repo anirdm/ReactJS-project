@@ -7,7 +7,7 @@ const PostCard = ({ post }) => {
     const { user } = useUserAuth();
 
     return (
-        <div className="post-card flex flex-col xl:flex-row w-fit xl:w-5/6 my-2 border border-gray-300 rounded-xl gap-12 p-2 shadow-md h-fit overflow-auto ">
+        <div className="post-card flex flex-col lg:flex-row w-max-screen w-fit xl:w-5/6 my-2 border border-gray-300 rounded-xl gap-12 p-2 shadow-md h-fit overflow-auto ">
             <div className="post-image-container flex-1">
                 <img className='rounded-xl w-full object-cover' src={post.imageURL} alt="post-img" />
             </div>

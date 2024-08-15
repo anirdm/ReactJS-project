@@ -15,13 +15,13 @@ export const PostProvider = ({ children }) => {
         setPosts((prevPosts) => [post, ...prevPosts]);
     };
 
-    const editPost = (id, updatedPost) => {
+    /*const editPost = (id, updatedPost) => {
         setPosts((prevPosts) =>
             prevPosts.map((post) =>
                 post.id === id ? { ...post, ...updatedPost } : post
             )
         );
-    };
+    };*/
 
     const deletePost = (id) => {
         setPosts((prevPosts) => prevPosts.filter((post) => post.id !== id));
@@ -58,7 +58,7 @@ export const PostProvider = ({ children }) => {
     }
 
     return (
-        <PostContext.Provider value={{ posts, createPost, deletePost, editPost, addComment, toggleLike, setPosts }}>
+        <PostContext.Provider value={{ posts, createPost, deletePost, /*editPost,*/ addComment, toggleLike, setPosts }}>
             {children}
         </PostContext.Provider>
     );

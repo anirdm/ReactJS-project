@@ -20,17 +20,17 @@ const NavBar = () => {
     }
 
     return (
-        <nav className='flex flex-col justify-between sticky top-0 bg-bright-white shadow-md-nav w-48 h-screen z-50'>
+        <nav className='flex flex-col justify-between sm:w-48 sm:px-0 px-5 sticky top-0 bg-bright-white shadow-md-nav w-fit h-screen z-50'>
             <div>
-                <Logo className="w-28" />
+                <Logo className="sm:w-28 w-16" />
                 {loading ? null : (
                     <section className='flex flex-col text-lg space-y-6 justify-between m-5'>
                         <NavLink
                             to='/'
                             className='flex flex-row items-center gap-3 hover:text-flagstone transition-colors text-xl'
                         >
-                            <AiOutlineCompass size={25} />
-                            Discover
+                            <AiOutlineCompass className='sm:w-6 sm:h-6 w-8 h-8' />
+                            <p className='hidden sm:block'>Discover</p>
                         </NavLink>
                         {user
                             ? <UserNavBarLinks />

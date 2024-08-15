@@ -54,15 +54,15 @@ const CreatePost = () => {
     }
 
     return (
-        <div className='flex justify-center items-center h-4/5 mt-6'>
+        <div className='flex justify-center items-center lg:h-4/5 mt-6'>
             <form
                 action='post'
-                className='flex flex-col border border-blue-mana rounded-lg w-fit p-6 shadow-lg'
+                className='flex flex-col border border-blue-mana rounded-lg w-fit p-6 shadow-lg lg:mb-0 mb-14'
                 onSubmit={handleSubmit}
             >
                 <h2 className='font-medium mb-6'>Create Post</h2>
 
-                <div className='flex gap-5'>
+                <div className='flex flex-col lg:flex-row gap-5'>
 
                     <div>
                         {selectedFile ? (
@@ -79,7 +79,7 @@ const CreatePost = () => {
                             </div>
                         )
                             : (
-                                <div className='flex flex-col justify-center items-center h-96 w-96 rounded-xl bg-bright-white'>
+                                <div className='flex flex-col justify-center items-center h-96 lg:w-96 w-fit rounded-xl bg-bright-white'>
                                     <LuUpload size={45} />
                                     <button
                                         type='button'
@@ -102,6 +102,7 @@ const CreatePost = () => {
                                     type="text"
                                     placeholder="Add a title"
                                     name="title"
+                                    className='lg:w-80 w-full'
                                     value={values.title}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
@@ -138,7 +139,7 @@ const CreatePost = () => {
 
                             <button
                                 type='submit'
-                                className="primary-button self-end mt-24"
+                                className="primary-button self-end lg:mt-24"
                             >
                                 {isLoading && (
                                     <ButtonSpinner />

@@ -13,15 +13,15 @@ const UserNavBarLinks = () => {
                 to='/post/create'
                 className='flex flex-row items-center gap-3 hover:text-flagstone transition-colors text-xl'
             >
-                <IoIosAddCircleOutline size={25} />
-                Create
+                <IoIosAddCircleOutline className='sm:w-6 sm:h-6 w-8 h-8' />
+                <p className='hidden sm:block'>Create</p>
             </NavLink>
             <NavLink
                 to={`/${user.username}`}
                 className='flex flex-row items-center gap-3 hover:text-flagstone transition-colors text-xl'
             >
-                <img className='w-7 h-7 rounded-full object-cover' src={`${user.profilePicURL}`} alt="profile-pic" />
-                Profile
+                <img className='w-8 h-8 rounded-full object-cover' src={`${user.profilePicURL}`} alt="profile-pic" />
+                <p className='hidden sm:block'>Profile</p>
             </NavLink>
         </>
     )
