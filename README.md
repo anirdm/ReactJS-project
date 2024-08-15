@@ -8,10 +8,6 @@ A React-based social media application inspired by Pinterest that allows users t
  - Login
  - Logout
 
- ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
- ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
  #### 🏡 Home page
  Displays all available posts
  - Features 
@@ -19,27 +15,20 @@ A React-based social media application inspired by Pinterest that allows users t
     - View post preview.
     - Navigate to detailed views of individual posts.
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
  #### 🖼 Details page
  Shows detailed information about a specific post.
  - Features 
     - View the full content of the post -> image, title, caption, post creator, number of likes and comments
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
 User view: 
  - Features 
     - Like/Dislike post
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
 Owner view:
  - Features 
     - Edit Post: Navigate to the edit form to update the post’s details.
     - Delete Post
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
  #### 👤 User profile page
 Displays the profile of the user.
@@ -48,13 +37,10 @@ Displays the profile of the user.
    - View the user’s profile picture, name, and bio.
    - Browse through posts created by the user.
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)  
 
 User view:
 - Features 
    - Follow/unfollow the certain user
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)  
 
 
 Profile owner view:
@@ -62,8 +48,6 @@ Profile owner view:
    - Liked Posts Button: View a list of posts you’ve liked.
    - Edit Profile Button: Navigate to the form to edit your profile.
 
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
 #### ➕ Create post page
 Allows users to create a new post.
@@ -73,17 +57,12 @@ Allows users to create a new post.
   - Title (Optional): Provide a title for the post.
   - Caption (Optional): Add a caption for the post.
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-
 #### ✏️🖼 Edit post page
 Allows the post owner to edit their existing post.
 
 - Form fields
   - Title: User can edit the title of the post. 
   - Caption: User can edit the posts's caption/description.
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
 #### ✏️👤 Edit profile page
 Allows the profile owner to update their profile information.
@@ -92,8 +71,6 @@ Allows the profile owner to update their profile information.
   - Profile picture: Update the profile picture.
   - Bio: Update bio.
   - Name: Change name.
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
 
 ## ⚙️ Technologies
