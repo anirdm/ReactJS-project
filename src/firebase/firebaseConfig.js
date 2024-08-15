@@ -4,12 +4,12 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBFOESdfFRqnKc5MFe3gqGoISgRFzUGeJo",
-  authDomain: "reactjs-softuni-project-92dc4.firebaseapp.com",
-  projectId: "reactjs-softuni-project-92dc4",
-  storageBucket: "reactjs-softuni-project-92dc4.appspot.com",
-  messagingSenderId: "714551680320",
-  appId: "1:714551680320:web:21aae7b4e34857c824eea5"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY ,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_I,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
 
