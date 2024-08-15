@@ -1,5 +1,5 @@
 
-# 📷🖼 Yesul
+# 📷🖼 Artistetic 
 A React-based social media application inspired by Pinterest that allows users to showcase their artwork, aesthetic photos, and other visual content, share their creative ideas, and connect with a community of like-minded people.  Users can create accounts, post content, engage with other users by liking and commenting on posts, and follow creators they admire.
 
 ## Pages and Functionality
@@ -20,11 +20,11 @@ A React-based social media application inspired by Pinterest that allows users t
  - Features 
     - View the full content of the post -> image, title, caption, post creator, number of likes and comments
 
-User view: 
+User: 
  - Features 
     - Like/Dislike post
 
-Owner view:
+Owner:
  - Features 
     - Edit Post: Navigate to the edit form to update the post’s details.
     - Delete Post
@@ -38,12 +38,12 @@ Displays the profile of the user.
    - Browse through posts created by the user.
 
 
-User view:
+User:
 - Features 
    - Follow/unfollow the certain user
 
 
-Profile owner view:
+Profile owner:
 - Features 
    - Liked Posts Button: View a list of posts you’ve liked.
    - Edit Profile Button: Navigate to the form to edit your profile.
